@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/04/2014 20:12:48 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="rmtool.model.bean.Participa" table="participa" catalog="test">
+        <composite-id name="id" class="rmtool.model.bean.ParticipaId">
+            <key-property name="usuario" type="int">
+                <column name="usuario" />
+            </key-property>
+            <key-property name="projeto" type="int">
+                <column name="projeto" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="projeto" class="rmtool.model.bean.Projeto" update="false" insert="false" fetch="select">
+            <column name="projeto" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="rmtool.model.bean.Usuario" update="false" insert="false" fetch="select">
+            <column name="usuario" not-null="true" />
+        </many-to-one>
+        <property name="id_1" type="int">
+            <column name="id" not-null="true" />
+        </property>
+        <property name="funcao" type="java.lang.Boolean">
+            <column name="funcao" />
+        </property>
+    </class>
+</hibernate-mapping>

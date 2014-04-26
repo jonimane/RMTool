@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/04/2014 20:12:48 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="rmtool.model.bean.Usuario" table="usuario" catalog="test">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="nome" type="string">
+            <column name="nome" length="50" />
+        </property>
+        <property name="login" type="string">
+            <column name="login" length="50" />
+        </property>
+        <property name="senha" type="string">
+            <column name="senha" length="50" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="50" />
+        </property>
+        <set name="participas" table="participa" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" not-null="true" />
+            </key>
+            <one-to-many class="rmtool.model.bean.Participa" />
+        </set>
+        <set name="requisitos" table="requisito" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="autor" />
+            </key>
+            <one-to-many class="rmtool.model.bean.Requisito" />
+        </set>
+    </class>
+</hibernate-mapping>
