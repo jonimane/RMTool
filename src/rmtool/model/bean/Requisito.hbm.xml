@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/04/2014 20:12:48 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="rmtool.model.bean.Requisito" table="requisito" catalog="test">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="projeto" class="rmtool.model.bean.Projeto" fetch="select">
+            <column name="projeto" />
+        </many-to-one>
+        <many-to-one name="usuario" class="rmtool.model.bean.Usuario" fetch="select">
+            <column name="autor" />
+        </many-to-one>
+        <many-to-one name="requisito" class="rmtool.model.bean.Requisito" fetch="select">
+            <column name="pai" />
+        </many-to-one>
+        <property name="nome" type="string">
+            <column name="nome" length="100" />
+        </property>
+        <property name="descricao" type="string">
+            <column name="descricao" length="65535" />
+        </property>
+        <property name="prioridade" type="java.lang.Boolean">
+            <column name="prioridade" />
+        </property>
+        <property name="situacao" type="java.lang.Boolean">
+            <column name="situacao" />
+        </property>
+        <property name="versao" type="string">
+            <column name="versao" length="10" />
+        </property>
+        <property name="tipo" type="java.lang.Boolean">
+            <column name="tipo" />
+        </property>
+        <property name="criacao" type="timestamp">
+            <column name="criacao" length="19" />
+        </property>
+        <set name="requisitos" table="requisito" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pai" />
+            </key>
+            <one-to-many class="rmtool.model.bean.Requisito" />
+        </set>
+    </class>
+</hibernate-mapping>

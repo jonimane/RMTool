@@ -6,6 +6,9 @@
 
 package rmtool;
 
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,6 +16,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import rmtool.model.bean.Requisito;
+import rmtool.model.dao.RequisitoDAO;
 
 /**
  *
@@ -28,7 +33,18 @@ public class RMTool extends Application {
             
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
+                RequisitoDAO requisitoDAO = new RequisitoDAO();
+        
+                Requisito requisito = new Requisito();
+                requisito.setCriacao( new Date() );
+                requisito.setDescricao("Descrição");
+
+                try {
+                    requisitoDAO.criar( requisito );
+                    System.out.println("DEU CERTO");
+                } catch (Exception ex) {
+                    Logger.getLogger(Teste.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         
