@@ -53,9 +53,9 @@ public class ProjetoDAO {
         
         s = HibernateUtilDAO.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        List<Projeto> requisitos = s.createCriteria(Projeto.class).list();
+        List<Projeto> projetos = s.createCriteria(Projeto.class).list();
         
-        return requisitos;
+        return projetos;
     }
     
     public Projeto procurarId(int id) throws Exception
