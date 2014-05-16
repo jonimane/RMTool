@@ -6,18 +6,14 @@
 
 package rmtool;
 
-import java.util.Date;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import rmtool.model.bean.Requisito;
-import rmtool.model.dao.RequisitoDAO;
 
 /**
  *
@@ -27,35 +23,14 @@ public class RMTool extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                RequisitoDAO requisitoDAO = new RequisitoDAO();
-        
-                Requisito requisito = new Requisito();
-                requisito.setCriacao( new Date() );
-                requisito.setDescricao("Descrição");
-
-                try {
-                    requisitoDAO.criar( requisito );
-                    System.out.println("DEU CERTO");
-                } catch (Exception ex) {
-                    Logger.getLogger(Teste.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-        
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        
-        Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        try {
+            Parent root = FXMLLoader.load( getClass().getResource("/rmtool/view/App.fxml") );
+            Scene scene = new Scene(root);
+            primaryStage.setScene( scene );
+            primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(RMTool.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

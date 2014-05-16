@@ -27,7 +27,7 @@ import rmtool.model.dao.ProjetoDAO;
  *
  * @author Haroldo&Faby
  */
-public class CriarProjetoFXMLController implements Initializable {
+public class ProjetoFormController implements Initializable {
 
     /**
      * Initializes the controller class.

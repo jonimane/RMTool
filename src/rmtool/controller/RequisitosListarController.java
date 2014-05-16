@@ -8,16 +8,14 @@ package rmtool.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
 
 /**
  * FXML Controller class
  *
- * @author Haroldo&Faby
+ * @author jonimane
  */
-public class BuscarProjetoFXMLController implements Initializable {
+public class RequisitosListarController implements Initializable {
 
     /**
      * Initializes the controller class.

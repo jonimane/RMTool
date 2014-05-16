@@ -13,9 +13,9 @@ import javafx.fxml.Initializable;
 /**
  * FXML Controller class
  *
- * @author Haroldo&Faby
+ * @author jonimane
  */
-public class ListarUsuariosFXMLController implements Initializable {
+public class AppController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -23,6 +23,20 @@ public class ListarUsuariosFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }   
     
+    public void criarAba()
+    {
+        
+    }
+    
+    public void adicionarAba()
+    {
+        
+    }
+    
+    public void carregarTela()
+    {
+        
+    }
 }
