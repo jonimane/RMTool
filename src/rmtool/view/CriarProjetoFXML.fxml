@@ -7,12 +7,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="rmtool.controller.ConsultarProjetoFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="rmtool.controller.CriarProjetoFXMLController">
   <children>
     <GridPane id="GridPane" layoutX="83.0" layoutY="108.0">
       <children>
-        <TextField prefWidth="381.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <TextArea prefWidth="381.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <TextField fx:id="nomeProjeto" prefWidth="381.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <TextArea fx:id="descricaoProjeto" prefWidth="381.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <Label text="Descrição:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
       </children>
