@@ -24,7 +24,7 @@ public class RMTool extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load( getClass().getResource("/rmtool/view/App.fxml") );
+            Parent root = FXMLLoader.load( getClass().getResource( Telas.App.getFXML() ) );
             Scene scene = new Scene(root);
             primaryStage.setScene( scene );
             primaryStage.show();

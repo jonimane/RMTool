@@ -6,15 +6,36 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="rmtool.controller.AppFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="rmtool.controller.AppController">
   <children>
     <BorderPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <center>
-        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" />
+        <TabPane fx:id="tpPrincipal" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="ALL_TABS" />
       </center>
       <left>
-        <TreeView prefHeight="200.0" prefWidth="200.0" />
+        <TreeView fx:id="tvLista" prefHeight="200.0" prefWidth="200.0" />
       </left>
+      <top>
+        <MenuBar fx:id="mbMenu" useSystemMenuBar="false">
+          <menus>
+            <Menu mnemonicParsing="false" text="File">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Close" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Edit">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Delete" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+              <items>
+                <MenuItem mnemonicParsing="false" text="About" />
+              </items>
+            </Menu>
+          </menus>
+        </MenuBar>
+      </top>
     </BorderPane>
   </children>
 </AnchorPane>
