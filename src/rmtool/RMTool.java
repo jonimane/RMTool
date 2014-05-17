@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import rmtool.controller.AppController;
 
 /**
  *
@@ -24,7 +25,10 @@ public class RMTool extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load( getClass().getResource( Telas.App.getFXML() ) );
+            FXMLLoader fl = new FXMLLoader();
+            Parent root = (Parent) fl.load( getClass().getResource( Telas.App.getFXML() ).openStream() );
+            TabManager.getInstance().setMain( (AppController) fl.getController());
+            //Parent root = FXMLLoader.load( getClass().getResource("view/UsuarioForm.fxml") );
             Scene scene = new Scene(root);
             primaryStage.setScene( scene );
             primaryStage.show();

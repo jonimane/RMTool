@@ -30,7 +30,7 @@
         <Font size="24.0" />
       </font>
     </Label>
-    <Button layoutX="395.0" layoutY="344.0" mnemonicParsing="false" text="Criar" />
+    <Button layoutX="395.0" layoutY="344.0" mnemonicParsing="false" onAction="#criarProjeto" text="Criar" />
     <Button layoutX="452.0" layoutY="344.0" mnemonicParsing="false" text="Cancelar" />
   </children>
 </AnchorPane>

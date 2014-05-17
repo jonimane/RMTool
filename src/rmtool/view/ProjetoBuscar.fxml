@@ -11,8 +11,8 @@
   <children>
     <GridPane id="GridPane" layoutX="42.0" layoutY="95.0">
       <children>
-        <TextField prefWidth="381.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <TextArea prefWidth="381.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <TextField fx:id="buscarNome" prefWidth="381.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <TextArea fx:id="buscarDescricao" prefWidth="381.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <Label text="Descrição:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
       </children>
@@ -25,13 +25,13 @@
         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <Label layoutX="208.0" layoutY="38.0" text="Consultar projeto" textAlignment="CENTER">
+    <Label layoutX="208.0" layoutY="38.0" text="Buscar projeto" textAlignment="CENTER">
       <font>
         <Font size="24.0" />
       </font>
     </Label>
-    <Button layoutX="398.0" layoutY="331.0" mnemonicParsing="false" text="Alterar" />
+    <Button layoutX="398.0" layoutY="331.0" mnemonicParsing="false" onAction="#AlterarProjeto" text="Alterar" />
     <Button layoutX="466.0" layoutY="331.0" mnemonicParsing="false" text="Cancelar" />
-    <Button layoutX="477.0" layoutY="96.0" mnemonicParsing="false" text="Buscar" />
+    <Button layoutX="477.0" layoutY="96.0" mnemonicParsing="false" onAction="#BucarProjetoNome" text="Buscar" />
   </children>
 </AnchorPane>

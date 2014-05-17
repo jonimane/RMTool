@@ -11,45 +11,18 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import rmtool.Controller;
-import rmtool.TabManager;
 import rmtool.model.bean.Projeto;
 import rmtool.model.dao.ProjetoDAO;
-
 
 /**
  * FXML Controller class
  *
  * @author Haroldo&Faby
  */
-public class ProjetoBuscarController implements Initializable, Controller {
+public class ProjetoAlterarController implements Initializable {
 
     @FXML
-    private TextField buscarNome;
-    @FXML 
-    private  TextArea buscarDescricao ;
-
-    /**
-     * Initializes the controller class.
-     */
-
-    @FXML
-    private Projeto buscarProjetoNome(ActionEvent event)throws Exception
-    {
-        Projeto pro = new Projeto();
-        ProjetoDAO proDao = new ProjetoDAO();
-        
-        String n = pro.getNome();
-        
-        proDao.buscarProjeto(n);
-        
-        return pro;
-    }
-    
-    @FXML
-    private void alterarProjeto(ActionEvent event) throws Exception {
+    private void AlterarProjeto(ActionEvent event) throws Exception {
         
         Projeto pro = new Projeto();
         ProjetoDAO projetoDAO = new ProjetoDAO();
@@ -59,16 +32,11 @@ public class ProjetoBuscarController implements Initializable, Controller {
         projetoDAO.alterar(pro);
     }
     
-    public void fecharTela()
-    {
-        TabManager.getInstance().fechar(this);
-    }
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
     
 }

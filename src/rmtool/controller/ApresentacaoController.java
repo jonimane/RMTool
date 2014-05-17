@@ -9,13 +9,14 @@ package rmtool.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
+import rmtool.Controller;
 
 /**
  * FXML Controller class
  *
  * @author jonimane
  */
-public class ApresentacaoController implements Initializable {
+public class ApresentacaoController implements Initializable, Controller {
 
     /**
      * Initializes the controller class.

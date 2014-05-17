@@ -6,7 +6,10 @@
 
 package rmtool.model.dao;
 
+import rmtool.model.dao.*;
 import java.util.List;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -17,7 +20,7 @@ import rmtool.model.bean.Projeto;
  * @author jonimane
  */
 public class ProjetoDAO {
-    public void criar( Projeto p ) throws Exception
+    public void criar( Projeto p )
     {
         Session s;
         
@@ -68,5 +71,22 @@ public class ProjetoDAO {
         cri.add(Restrictions.eq("id", id));
         
         return (Projeto) cri.list().get(0);
+    }
+    
+    public Projeto buscarProjeto(String Nome) throws Exception
+    {
+        Session s;
+        
+        s = HibernateUtilDAO.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        Criteria cri = s.createCriteria(Projeto.class);
+        cri.add(Restrictions.eq("projetoNome", Nome));
+        
+        return (Projeto) cri.list().get(0);
+    }
+    
+    @FXML
+    private void cancelar(ActionEvent event){
+    
     }
 }

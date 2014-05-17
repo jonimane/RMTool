@@ -8,7 +8,10 @@ package rmtool.model.dao;
 
 import java.util.List;
 import javax.swing.JOptionPane;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+import rmtool.model.bean.Requisito;
 import rmtool.model.bean.Usuario;
 
 /**
@@ -26,10 +29,9 @@ public class UsuarioDAO {
         session.beginTransaction();
         session.save(user);
         session.getTransaction().commit();
-        JOptionPane.showMessageDialog(null,"Usuário cadastrado com sucesso");
+       
         
      }catch(Exception ex){
-        JOptionPane.showMessageDialog(null,"Erro ao cadastrar o Usuário ");
     
       }
    }
@@ -43,10 +45,10 @@ public class UsuarioDAO {
         session.beginTransaction();
         session.delete(user);
         session.getTransaction().commit();
-        JOptionPane.showMessageDialog(null,"Usuário deletado com sucesso");
+       
         
      }catch(Exception ex){
-        JOptionPane.showMessageDialog(null,"Erro ao deletar o Usuário ");
+        
     
       }
    }
@@ -60,33 +62,35 @@ public class UsuarioDAO {
         session.beginTransaction();
         session.merge(user);
         session.getTransaction().commit();
-        JOptionPane.showMessageDialog(null,"Usuário editado com sucesso");
+       
         
      }catch(Exception ex){
-        JOptionPane.showMessageDialog(null,"Erro ao editado o Usuário ");
+        
     
       }
         session.close();
    }
     
-    public void listar (Usuario user)
+    public List<Usuario> lista(Usuario user)throws Exception
     {
-        Session session = HibernateUtilDAO.getSessionFactory().getCurrentSession();
+        Session s;
         
-        try
-        {
-            session.beginTransaction();
-            List<Usuario> listarUsuario = session.createQuery("from usuario").list();
-
-            for(Usuario u : listarUsuario)
-            {
-                System.out.println("Nome " +u.getNome());
-                System.out.println("Email"+u.getEmail());
-                System.out.println("Login"+u.getLogin());
-            }
-            JOptionPane.showMessageDialog(null,"Usuário Listado com sucesso");
-        } catch(Exception ex) {
-            JOptionPane.showMessageDialog(null,"Erro ao Listar o Usuário ");
-        }
+        s = HibernateUtilDAO.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        List<Usuario> listarUsuario = s.createCriteria(Usuario.class).list();
+        
+        return listarUsuario;
+    }
+    
+    public Usuario procurarId(int id) throws Exception
+    {
+        Session s;
+        
+        s = HibernateUtilDAO.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        Criteria cri = s.createCriteria(Usuario.class);
+        cri.add(Restrictions.eq("id", id));
+        
+        return (Usuario) cri.list().get(0);
     }
 }

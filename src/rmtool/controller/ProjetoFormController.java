@@ -12,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 */
 import java.net.URL;
-import java.sql.Connection;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -40,11 +39,18 @@ public class ProjetoFormController implements Initializable {
     @FXML
     private void criarProjeto(ActionEvent event) {
         
+        Projeto pro = new Projeto();
+        ProjetoDAO proDao = new ProjetoDAO();
         
+        pro.setNome("nomeProjeto");
+        pro.setDescricao("descricaoProjeto");
         
-        
+        proDao.criar(pro);
+
     }
     
+    
+    //@FXML void AlterarProjeto
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
