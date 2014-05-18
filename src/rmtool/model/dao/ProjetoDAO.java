@@ -6,8 +6,8 @@
 
 package rmtool.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -29,7 +29,7 @@ public class ProjetoDAO {
         s.getTransaction().commit();
     }
     
-    public void alterar( Projeto p ) throws Exception
+    public void alterar( Projeto p )
     {
         Session s;
         
@@ -39,7 +39,7 @@ public class ProjetoDAO {
         s.getTransaction().commit();
     }
     
-    public void excluir( Projeto p ) throws Exception
+    public void excluir( Projeto p )
     {
         Session s;
         
@@ -49,7 +49,7 @@ public class ProjetoDAO {
         s.getTransaction().commit();
     }
     
-    public List<Projeto> listar() throws Exception
+    public List<Projeto> listar()
     {
         Session s;
         
@@ -60,7 +60,7 @@ public class ProjetoDAO {
         return projetos;
     }
     
-    public Projeto procurarId(int id) throws Exception
+    public Projeto procurarId(int id)
     {
         Session s;
         
@@ -72,25 +72,30 @@ public class ProjetoDAO {
         return (Projeto) cri.list().get(0);
     }
     
-    public Projeto buscarProjeto(String Nome) throws Exception
+    public Projeto buscarProjeto(String Nome)
     {
         Session s;
         
         s = HibernateUtilDAO.getSessionFactory().getCurrentSession();
         s.beginTransaction();
         Criteria cri = s.createCriteria(Projeto.class);
-        cri.add(Restrictions.eq("projetoNome", Nome));
+        cri.add(Restrictions.eq("nome", Nome));
         
         return (Projeto) cri.list().get(0);
     }
     
-    public Set<Projeto> procurarPorUsuario(Usuario u)
+    public List<Projeto> procurarPorUsuario(Usuario u)
     {
-        Session s;
+        List<Projeto> projetos = listar();
+        List<Projeto> res = new ArrayList<>();
         
-        s = HibernateUtilDAO.getSessionFactory().getCurrentSession();
-        s.beginTransaction();
+        for (Projeto projeto : projetos) {
+            if( projeto.getParticipantes().contains( u ) )
+            {
+                res.add(projeto);
+            }
+        }
         
-        return null;
+        return res;
     }
 }

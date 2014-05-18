@@ -6,7 +6,6 @@
 
 package rmtool.model.dao;
 
-import rmtool.model.dao.*;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -18,7 +17,7 @@ import rmtool.model.bean.Requisito;
  * @author jonimane
  */
 public class RequisitoDAO {
-    public void criar( Requisito r ) throws Exception
+    public void criar( Requisito r )
     {
         Session s;
         
@@ -28,7 +27,7 @@ public class RequisitoDAO {
         s.getTransaction().commit();
     }
     
-    public void alterar( Requisito r ) throws Exception
+    public void alterar( Requisito r )
     {
         Session s;
         
@@ -38,7 +37,7 @@ public class RequisitoDAO {
         s.getTransaction().commit();
     }
     
-    public void excluir( Requisito r ) throws Exception
+    public void excluir( Requisito r )
     {
         Session s;
         
@@ -48,7 +47,7 @@ public class RequisitoDAO {
         s.getTransaction().commit();
     }
     
-    public List<Requisito> listar() throws Exception
+    public List<Requisito> listar()
     {
         Session s;
         
@@ -59,7 +58,7 @@ public class RequisitoDAO {
         return requisitos;
     }
     
-    public Requisito procurarId(int id) throws Exception
+    public Requisito procurarId(int id)
     {
         Session s;
         
