@@ -6,14 +6,13 @@
 
 package rmtool.model.dao;
 
-import rmtool.model.dao.*;
 import java.util.List;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
+import java.util.Set;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import rmtool.model.bean.Projeto;
+import rmtool.model.bean.Usuario;
 
 /**
  *
@@ -85,8 +84,13 @@ public class ProjetoDAO {
         return (Projeto) cri.list().get(0);
     }
     
-    @FXML
-    private void cancelar(ActionEvent event){
-    
+    public Set<Projeto> procurarPorUsuario(Usuario u)
+    {
+        Session s;
+        
+        s = HibernateUtilDAO.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        
+        return null;
     }
 }

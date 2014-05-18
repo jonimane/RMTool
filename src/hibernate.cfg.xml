@@ -8,9 +8,10 @@
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">11802</property>
     <property name="hibernate.current_session_context_class">thread</property>
-    <mapping resource="rmtool/model/bean/Participa.hbm.xml"/>
-    <mapping resource="rmtool/model/bean/Requisito.hbm.xml"/>
-    <mapping resource="rmtool/model/bean/Projeto.hbm.xml"/>
-    <mapping resource="rmtool/model/bean/Usuario.hbm.xml"/>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.hbm2ddl.auto">create-drop</property>
+    <mapping class="rmtool.model.bean.Requisito"/>
+    <mapping class="rmtool.model.bean.Projeto"/>
+    <mapping class="rmtool.model.bean.Usuario"/>
   </session-factory>
 </hibernate-configuration>
