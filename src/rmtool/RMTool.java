@@ -14,20 +14,34 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import rmtool.controller.AppController;
+import rmtool.model.dao.HibernateUtilDAO;
 
 /**
  *
  * @author jonimane
  */
 public class RMTool extends Application {
+    public static RMTool instance;
+    public Stage primaryStage;
     
     @Override
     public void start(Stage primaryStage) {
+        if( instance == null )
+        {
+            instance = this;
+        }
+        
+        this.primaryStage = primaryStage;
+        
+        // Carregar SessionManager
+        SessionManager sm = SessionManager.getInstance();
+        
+        // Carregar Hibernate
+        HibernateUtilDAO.getSessionFactory();
+        
         try {
             FXMLLoader fl = new FXMLLoader();
-            Parent root = (Parent) fl.load( getClass().getResource( Telas.App.getFXML() ).openStream() );
-            TabManager.getInstance().setMain( (AppController) fl.getController());
+            Parent root = (Parent) fl.load( getClass().getResource( Telas.Entrar.getFXML() ).openStream() );
             
             Scene scene = new Scene(root);
             primaryStage.setScene( scene );
@@ -48,5 +62,25 @@ public class RMTool extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+    public static RMTool getInstance() {
+        return instance;
+    }
+
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
     
+    public void mudarCena( Scene novoPalco )
+    {
+        Stage s = getPrimaryStage();
+        
+        s.hide();
+        s.setScene(novoPalco);
+        s.show();
+    }
 }

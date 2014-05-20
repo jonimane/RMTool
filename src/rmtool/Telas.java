@@ -13,6 +13,7 @@ package rmtool;
 public enum Telas {
     App("App"),
     Apresentacao("Apresentação"),
+    Entrar("Entrar"),
     ProjetoBuscar("Projeto - Buscar"),
     ProjetoForm("Projeto - Form"),
     RequisitoForm("Requisito - Form"),

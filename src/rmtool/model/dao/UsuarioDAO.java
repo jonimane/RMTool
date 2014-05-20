@@ -93,4 +93,23 @@ public class UsuarioDAO {
         
         return (Usuario) cri.list().get(0);
     }
+
+    public Usuario validar( Usuario u ) {
+        Session s;
+        
+        s = HibernateUtilDAO.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        Criteria cri = s.createCriteria(Usuario.class);
+        cri.add( Restrictions.eq( "login", u.getLogin() ) );
+        cri.add( Restrictions.eq( "senha", u.getSenha() ) );
+        
+        List<Usuario> lista = cri.list();
+        
+        if( lista.size() > 0 )
+        {
+            return lista.get(0);
+        }
+            
+        return null;
+    }
 }
