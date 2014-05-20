@@ -13,7 +13,7 @@
         <TabPane fx:id="tpPrincipal" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="ALL_TABS" />
       </center>
       <left>
-        <TreeView fx:id="tvLista" prefHeight="200.0" prefWidth="200.0" />
+        <TreeView fx:id="tvLista" editable="true" prefHeight="200.0" prefWidth="200.0" showRoot="false" />
       </left>
       <top>
         <MenuBar fx:id="mbMenu" useSystemMenuBar="false">

@@ -22,8 +22,8 @@
         <PasswordField fx:id="txtSenha" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
         <HBox alignment="CENTER" prefHeight="22.0" prefWidth="293.0" spacing="10.0" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.valignment="CENTER">
           <children>
-            <Button mnemonicParsing="false" onAction="#actionEntrar" text="Entrar" />
-            <Button mnemonicParsing="false" onAction="#actionSair" text="Sair" />
+            <Button fx:id="btnEntrar" mnemonicParsing="false" onAction="#actionEntrar" text="Entrar" />
+            <Button fx:id="btnSair" mnemonicParsing="false" onAction="#actionSair" text="Sair" />
           </children>
         </HBox>
       </children>
