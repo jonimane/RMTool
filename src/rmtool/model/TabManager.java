@@ -51,10 +51,21 @@ public class TabManager {
         main = c;
     }
     
-    public void criar(Telas tela){
+    public void criar(Telas tela, boolean requestFocus ){
         Tab tab = carregarFXML(tela);
         getMain().tpPrincipal.getTabs().add( tab );
+        
+        if( requestFocus )
+        {
+            tab.getTabPane().getSelectionModel().select( tab );
+        }
     }
+    
+    public void criar( Telas tela )
+    {
+        criar(tela, true);
+    }
+    
     public void fechar(Controller c)
     {
         Tab t = lista.get( c );
@@ -73,7 +84,6 @@ public class TabManager {
            t.setText( tela.toString() );
            t.setClosable( true );
            lista.put( (Controller) l.getController(), t );
-           t.getTabPane().getSelectionModel().select(t);
             
            return t;
         } catch (IOException ex) {
