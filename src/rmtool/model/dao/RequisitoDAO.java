@@ -6,10 +6,12 @@
 
 package rmtool.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import rmtool.model.bean.Projeto;
 import rmtool.model.bean.Requisito;
 
 /**
@@ -68,5 +70,19 @@ public class RequisitoDAO {
         cri.add(Restrictions.eq("id", id));
         
         return (Requisito) cri.list().get(0);
+    }
+    
+    public List<Requisito> procurar( Projeto p )
+    {
+        List<Requisito> requisitos = listar();
+        List<Requisito> res = new ArrayList<>();
+        
+        for (Requisito requisito : requisitos) {
+            if( requisito.getProjeto().equals( p ) ) {
+                res.add(requisito);
+            }
+        }
+        
+        return res;
     }
 }

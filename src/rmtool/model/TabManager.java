@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-package rmtool;
+package rmtool.model;
 
+import rmtool.model.Telas;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;

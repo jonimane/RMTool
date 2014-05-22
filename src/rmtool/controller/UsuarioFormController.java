@@ -13,8 +13,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import rmtool.Controller;
-import rmtool.TabManager;
+import rmtool.model.Controller;
+import rmtool.model.TabManager;
 import rmtool.model.bean.Usuario;
 import rmtool.model.dao.UsuarioDAO;
 

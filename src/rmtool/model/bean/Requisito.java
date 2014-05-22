@@ -16,6 +16,10 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
+import rmtool.model.NomeEditavel;
+import rmtool.model.TipoRequisito;
+import rmtool.model.dao.RequisitoDAO;
 
 /**
  *
@@ -23,14 +27,14 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table(name = "requisito")
-public class Requisito implements Serializable {
+public class Requisito implements Serializable, NomeEditavel {
     private Integer id;
     private String nome;
     private String descricao;
-    private Boolean prioridade;
-    private Boolean situacao;
+    private Byte prioridade;
+    private Byte situacao;
     private String versao;
-    private Boolean tipo;
+    private Byte tipo;
     private Date criacao;
     private Projeto projeto;
     private Usuario usuario;
@@ -62,19 +66,19 @@ public class Requisito implements Serializable {
         this.descricao = descricao;
     }
 
-    public Boolean isPrioridade() {
+    public Byte getPrioridade() {
         return prioridade;
     }
 
-    public void setPrioridade(Boolean prioridade) {
+    public void setPrioridade(Byte prioridade) {
         this.prioridade = prioridade;
     }
 
-    public Boolean isSituacao() {
+    public Byte getSituacao() {
         return situacao;
     }
 
-    public void setSituacao(Boolean situacao) {
+    public void setSituacao(Byte situacao) {
         this.situacao = situacao;
     }
 
@@ -86,12 +90,23 @@ public class Requisito implements Serializable {
         this.versao = versao;
     }
 
-    public Boolean isTipo() {
+    public Byte getTipo() {
         return tipo;
     }
 
-    public void setTipo(Boolean tipo) {
+    public void setTipo(Byte tipo) {
         this.tipo = tipo;
+    }
+    
+    @Transient
+    public TipoRequisito getTipoRequisito()
+    {
+        return TipoRequisito.parse( getTipo() );
+    }
+    
+    public void setTipoRequisito( TipoRequisito tipo )
+    {
+        setTipo( tipo.toByte() );
     }
 
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
@@ -124,6 +139,31 @@ public class Requisito implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
-    
+
+    @Transient
+    @Override
+    public String getNomeEditavel() {
+        return getNome();
+    }
+
+    @Override
+    public NomeEditavel setNomeEditavel(String nome) {
+        setNome(nome);
+        
+        return this;
+    }
+
+    @Override
+    public boolean salvar() {
+        try {
+            RequisitoDAO requisitoDAO = new RequisitoDAO();
+            requisitoDAO.alterar(this);
+        }
+        catch( Exception e )
+        {
+            return false;
+        }
+        
+        return true;
+    }
 }

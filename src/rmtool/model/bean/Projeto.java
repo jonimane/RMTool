@@ -19,6 +19,9 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import rmtool.model.NomeEditavel;
+import rmtool.model.dao.ProjetoDAO;
 
 /**
  *
@@ -26,7 +29,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "projeto")
-public class Projeto implements Serializable {
+public class Projeto implements Serializable, NomeEditavel {
     private Integer id;
     private String nome;
     private String descricao;
@@ -107,5 +110,33 @@ public class Projeto implements Serializable {
         int hash = 3;
         hash = 23 * hash + Objects.hashCode(this.id);
         return hash;
+    }
+
+    @Override
+    public NomeEditavel setNomeEditavel( String nome ) {
+        setNome(nome);
+        
+        return this;
+    }
+
+    @Transient
+    @Override
+    public String getNomeEditavel() {
+        return getNome();
+    }
+
+    @Override
+    public boolean salvar() {
+        try
+        {
+            ProjetoDAO projetoDAO = new ProjetoDAO();
+            projetoDAO.alterar( this );
+        }
+        catch( Exception e )
+        {
+            return false;
+        }
+        
+        return true;
     }
 }

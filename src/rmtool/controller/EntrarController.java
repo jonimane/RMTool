@@ -18,17 +18,15 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Screen;
 import name.antonsmirnov.javafx.dialog.Dialog;
 import rmtool.RMTool;
-import rmtool.SessionManager;
-import rmtool.TabManager;
-import rmtool.Telas;
+import rmtool.model.SessionManager;
+import rmtool.model.TabManager;
+import rmtool.model.Telas;
 import rmtool.model.bean.Usuario;
 import rmtool.model.dao.UsuarioDAO;
 
@@ -47,13 +45,16 @@ public class EntrarController implements Initializable {
     @FXML
     public TextField txtSenha;
     
+    public SessionManager sm;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        btnEntrar.setDefaultButton(true);
-        btnSair.setCancelButton(true);
+        sm = SessionManager.getInstance();
+        
+        setAtalhos( true );
         
         Platform.runLater( new Runnable() {
             @Override
@@ -63,12 +64,19 @@ public class EntrarController implements Initializable {
         });
     }
     
-    @FXML
-    public void actionEntrar( ActionEvent e )
+    public Usuario gerarUsuario()
     {
         Usuario u = new Usuario();
         u.setLogin( txtUsuario.getText() );
         u.setSenha( txtSenha.getText() );
+        
+        return u;
+    }
+    
+    @FXML
+    public void actionEntrar( ActionEvent e )
+    {
+        Usuario u = gerarUsuario();
         
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         u = usuarioDAO.validar( u );
@@ -79,27 +87,34 @@ public class EntrarController implements Initializable {
         }
         else
         {
-            btnEntrar.setDefaultButton(false);
-            btnSair.setCancelButton(false);
-            
-            SessionManager.getInstance().put("usuario", u);
-            
-            try {
-                FXMLLoader fl = new FXMLLoader();
-                Parent root = (Parent) fl.load( getClass().getResource( Telas.App.getFXML() ).openStream() );
-                
-                // Registrar AppController no TabManager
-                TabManager.getInstance().setMain( (AppController) fl.getController());
-                
-                RMTool rmTool = RMTool.getInstance();
-                
-                Scene scene = new Scene(root);
-                rmTool.mudarCena(scene);
-                rmTool.maximarTela();
-            } catch (IOException ex) {
-                Logger.getLogger(EntrarController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            setAtalhos( false );
+            sm.put("usuario", u);
+            carregarApp();
         }
+    }
+    
+    public void carregarApp()
+    {
+        try {
+            FXMLLoader fl = new FXMLLoader();
+            Parent root = (Parent) fl.load( getClass().getResource( Telas.App.getFXML() ).openStream() );
+
+            // Registrar AppController no TabManager
+            TabManager.getInstance().setMain( (AppController) fl.getController() );
+
+            RMTool rmTool = (RMTool) sm.get("RMTool");
+            Scene scene = new Scene(root);
+            rmTool.mudarCena(scene);
+            rmTool.maximarTela();
+        } catch (IOException ex) {
+            Logger.getLogger(EntrarController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void setAtalhos( boolean status )
+    {
+        btnEntrar.setDefaultButton(status);
+        btnSair.setCancelButton(status);
     }
     
     @FXML

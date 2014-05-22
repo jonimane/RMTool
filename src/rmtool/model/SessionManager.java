@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package rmtool;
+package rmtool.model;
 
 import java.util.HashMap;
 

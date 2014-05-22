@@ -5,7 +5,10 @@
  */
 package rmtool.view.components;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeCell;
 import javafx.scene.input.KeyCode;
@@ -17,9 +20,27 @@ import javafx.scene.input.KeyEvent;
  */
 public class TextFieldTreeCellImpl extends TreeCell<String> {
     private TextField textField;
+    private ContextMenu addMenu = new ContextMenu();
+
+    public TextFieldTreeCellImpl() {
+        MenuItem addMenuItem = new MenuItem("...");
+        addMenu.getItems().add(addMenuItem);
+        
+        addMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            }
+        });
+    }
     
     @Override
     public void startEdit() {
+        if( !( getTreeItem() instanceof TreeItemImpl ) )
+        {
+            return;
+        }
+        
         super.startEdit();
 
         if (textField == null) {
@@ -28,6 +49,7 @@ public class TextFieldTreeCellImpl extends TreeCell<String> {
         
         setText(null);
         setGraphic(textField);
+        textField.requestFocus();
         textField.selectAll();
     }
     
@@ -35,7 +57,8 @@ public class TextFieldTreeCellImpl extends TreeCell<String> {
     public void cancelEdit() {
         super.cancelEdit();
 
-        setText((String) getItem());
+        textField.setText(getItem());
+        setText(getItem());
         setGraphic(getTreeItem().getGraphic());
     }
 
@@ -57,6 +80,10 @@ public class TextFieldTreeCellImpl extends TreeCell<String> {
             } else {
                 setText(getString());
                 setGraphic(getTreeItem().getGraphic());
+                
+                if ( getTreeItem().getParent() != null ){
+                    setContextMenu(addMenu);
+                }
             }
         }
     }

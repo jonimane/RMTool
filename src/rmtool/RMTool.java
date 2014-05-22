@@ -6,6 +6,8 @@
 
 package rmtool;
 
+import rmtool.model.SessionManager;
+import rmtool.model.Telas;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,20 +25,15 @@ import rmtool.model.dao.HibernateUtilDAO;
  * @author jonimane
  */
 public class RMTool extends Application {
-    private static RMTool instance;
     public Stage primaryStage;
     
     @Override
     public void start(Stage primaryStage) {
-        if( instance == null )
-        {
-            instance = this;
-        }
-        
         this.primaryStage = primaryStage;
         
         // Carregar SessionManager
         SessionManager sm = SessionManager.getInstance();
+        sm.put("RMTool", this);
         
         // Carregar Hibernate
         HibernateUtilDAO.getSessionFactory();
@@ -63,10 +60,6 @@ public class RMTool extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-    }
-
-    public static RMTool getInstance() {
-        return instance;
     }
 
     public Stage getPrimaryStage() {

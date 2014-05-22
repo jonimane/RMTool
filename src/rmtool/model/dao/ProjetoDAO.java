@@ -84,7 +84,7 @@ public class ProjetoDAO {
         return (Projeto) cri.list().get(0);
     }
     
-    public List<Projeto> procurarPorUsuario(Usuario u)
+    public List<Projeto> procurar(Usuario u)
     {
         List<Projeto> projetos = listar();
         List<Projeto> res = new ArrayList<>();
