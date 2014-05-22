@@ -103,6 +103,6 @@ public class TextFieldTreeCellImpl extends TreeCell<String> {
     }
 
     private String getString() {
-        return getItem() == null ? "" : getItem().toString();
+        return getItem() == null ? "" : getItem();
     }
 }

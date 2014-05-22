@@ -11,9 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
@@ -85,6 +88,9 @@ public class AppController implements Initializable {
         
         // Evento para verificar o suporte a editar item pelo TreeView
         tvLista.setOnEditCommit( tvListaSetOnEditCommit() );
+        
+        // Adicionar ContextMenu na TreeView
+        tvLista.setContextMenu( tvListaGerarContextMenu() );
         
         // Setando nó root na TreeView
         tvLista.setRoot(root);
@@ -181,5 +187,20 @@ public class AppController implements Initializable {
                 
             }
         }
+    }
+
+    private ContextMenu tvListaGerarContextMenu() {
+        ContextMenu menu = new ContextMenu();
+        MenuItem mi = new MenuItem("Adicionar Projeto");
+        menu.getItems().add(mi);
+        
+        mi.setOnAction( new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                TabManager.getInstance().criar( Telas.ProjetoForm );
+            }
+        });
+        
+        return menu;
     }
 }

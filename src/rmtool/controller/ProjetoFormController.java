@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import rmtool.model.Controller;
 import rmtool.model.bean.Projeto;
 import rmtool.model.dao.ProjetoDAO;
 /**
@@ -26,18 +27,18 @@ import rmtool.model.dao.ProjetoDAO;
  *
  * @author Haroldo&Faby
  */
-public class ProjetoFormController implements Initializable {
+public class ProjetoFormController implements Initializable, Controller {
 
     /**
      * Initializes the controller class.
      */
     
     @FXML
-    private TextField nomeProjeto;
-    private TextArea descricaoProjeto;
+    public TextField nomeProjeto;
+    public TextArea descricaoProjeto;
     
     @FXML
-    private void criarProjeto(ActionEvent event) {
+    public void criarProjeto(ActionEvent event) {
         
         Projeto pro = new Projeto();
         ProjetoDAO proDao = new ProjetoDAO();
@@ -48,7 +49,6 @@ public class ProjetoFormController implements Initializable {
         proDao.criar(pro);
 
     }
-    
     
     //@FXML void AlterarProjeto
     

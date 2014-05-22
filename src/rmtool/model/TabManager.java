@@ -65,20 +65,21 @@ public class TabManager {
     private Tab carregarFXML( Telas tela )
     {
         try {
-            FXMLLoader l = new FXMLLoader();
-            Parent root = (Parent) l.load( getClass().getResource( tela.getFXML() ).openStream() );
+           FXMLLoader l = new FXMLLoader();
+           Parent root = (Parent) l.load( getClass().getResource( tela.getFXML() ).openStream() );
            
-            Tab t = new Tab();
-            t.setContent( root );
-            t.setText( tela.toString() );
-            t.setClosable( true );
-            lista.put( (Controller) l.getController(), t );
+           Tab t = new Tab();
+           t.setContent( root );
+           t.setText( tela.toString() );
+           t.setClosable( true );
+           lista.put( (Controller) l.getController(), t );
+           t.getTabPane().getSelectionModel().select(t);
             
-            return t;
+           return t;
         } catch (IOException ex) {
-            Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
             
-            return null;
+           return null;
         }
     }
 }
