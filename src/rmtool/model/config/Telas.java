@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package rmtool.model;
+package rmtool.model.config;
 
 /**
  *

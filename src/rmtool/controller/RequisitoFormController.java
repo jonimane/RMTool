@@ -6,17 +6,17 @@
 
 package rmtool.controller;
 
-import rmtool.controller.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
+import rmtool.model.Controller;
 
 /**
  * FXML Controller class
  *
  * @author jonimane
  */
-public class RequisitoFormController implements Initializable {
+public class RequisitoFormController implements Initializable, Controller {
 
     /**
      * Initializes the controller class.

@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import rmtool.model.Controller;
 import rmtool.model.bean.Projeto;
 import rmtool.model.dao.ProjetoDAO;
 
@@ -19,7 +20,7 @@ import rmtool.model.dao.ProjetoDAO;
  *
  * @author Haroldo&Faby
  */
-public class ProjetoAlterarController implements Initializable {
+public class ProjetoAlterarController implements Initializable, Controller {
 
     @FXML
     private void AlterarProjeto(ActionEvent event) throws Exception {

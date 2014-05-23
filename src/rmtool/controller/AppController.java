@@ -22,10 +22,11 @@ import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.util.Callback;
+import rmtool.model.Controller;
 import rmtool.model.NomeEditavel;
 import rmtool.model.SessionManager;
 import rmtool.model.TabManager;
-import rmtool.model.Telas;
+import rmtool.model.config.Telas;
 import rmtool.model.TipoRequisito;
 import rmtool.model.bean.Projeto;
 import rmtool.model.bean.Requisito;
@@ -40,7 +41,7 @@ import rmtool.view.components.TreeItemImpl;
  *
  * @author jonimane
  */
-public class AppController implements Initializable {
+public class AppController implements Initializable, Controller{
 
     @FXML
     public TabPane tpPrincipal;

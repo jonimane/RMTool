@@ -6,9 +6,11 @@
 
 package rmtool.model;
 
-import rmtool.model.Telas;
+import rmtool.model.config.Telas;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,7 +53,7 @@ public class TabManager {
         main = c;
     }
     
-    public void criar(Telas tela, boolean requestFocus ){
+    public Tab criar(Telas tela, boolean requestFocus ){
         Tab tab = carregarFXML(tela);
         getMain().tpPrincipal.getTabs().add( tab );
         
@@ -59,11 +61,13 @@ public class TabManager {
         {
             tab.getTabPane().getSelectionModel().select( tab );
         }
+        
+        return tab;
     }
     
-    public void criar( Telas tela )
+    public Tab criar( Telas tela )
     {
-        criar(tela, true);
+        return criar(tela, true);
     }
     
     public void fechar(Controller c)
@@ -91,5 +95,24 @@ public class TabManager {
             
            return null;
         }
+    }
+
+    public Map<Controller, Tab> getLista()
+    {
+        return lista;
+    }
+    
+    public List<Controller> get(Tab t)
+    {
+        List<Controller> keys = new ArrayList<>();
+        
+        for (Map.Entry<Controller, Tab> entry : lista.entrySet()) {
+            if( entry.getValue() == t )
+            {
+                keys.add( entry.getKey() );
+            }
+        }
+        
+        return keys;
     }
 }

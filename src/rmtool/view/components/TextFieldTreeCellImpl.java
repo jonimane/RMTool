@@ -5,9 +5,9 @@
  */
 package rmtool.view.components;
 
+import rmtool.model.config.Menus;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -51,75 +51,28 @@ public class TextFieldTreeCellImpl extends TreeCell<String> {
                 switch( ti.getObjeto().getClass().getSimpleName() )
                 {
                     case "Projeto":
-                        novosItens.add( criarMenu("Editar", new EventHandler<ActionEvent>() {
-                            @Override
-                            public void handle(ActionEvent event) {
-                                
-                            }
-                        }));
-                        
-                        novosItens.add( criarMenu("Excluir", new EventHandler<ActionEvent>() {
-                            @Override
-                            public void handle(ActionEvent event) {
-                                
-                            }
-                        }));
-                        
-                        novosItens.add( criarMenu("Rastreabilidade", new EventHandler<ActionEvent>() {
-                            @Override
-                            public void handle(ActionEvent event) {
-                                
-                            }
-                        }));
-                    break;
-                    
-                    case "TipoRequisito":
-                        novosItens.add( criarMenu("Criar Requisito", new EventHandler<ActionEvent>() {
-                            @Override
-                            public void handle(ActionEvent event) {
-                                
-                            }
-                        }));
+                        novosItens.addAll( Menus.Projeto.gerarItens( pai ) );
                     break;
                     
                     case "Requisito":
-                        novosItens.add( criarMenu("Editar", new EventHandler<ActionEvent>() {
-                            @Override
-                            public void handle(ActionEvent event) {
-                                
-                            }
-                        }) );
-                        novosItens.add( criarMenu("Excluir", new EventHandler<ActionEvent>() {
-                            @Override
-                            public void handle(ActionEvent event) {
-                                
-                            }
-                        }));
+                        novosItens.addAll( Menus.Requisito.gerarItens( pai ) );
                     break;
                     
-                    default:
-                        
+                    case "TipoRequisito":
+                        novosItens.addAll( Menus.TipoRequisito.gerarItens( pai ) );
                     break;
                 }
                 
-                if( novosItens.size() == 0 )
+                if( novosItens.isEmpty() )
                 {
                     MenuItem item = new MenuItem("...");
+                    item.setDisable(true);
                     novosItens.add( item );
                 }
                 
                 menu.getItems().addAll( novosItens );
             }
         };
-    }
-    
-    public MenuItem criarMenu( String titulo, EventHandler<ActionEvent> acao )
-    {
-        MenuItem mi = new MenuItem();
-        mi.setText(titulo);
-        mi.setOnAction( acao );
-        
-        return mi;
     }
     
     @Override

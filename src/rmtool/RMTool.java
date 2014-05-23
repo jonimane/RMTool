@@ -7,7 +7,7 @@
 package rmtool;
 
 import rmtool.model.SessionManager;
-import rmtool.model.Telas;
+import rmtool.model.config.Telas;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

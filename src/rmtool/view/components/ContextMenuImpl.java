@@ -18,7 +18,7 @@ public class ContextMenuImpl extends ContextMenu {
     
     public ContextMenuImpl( Node pai ) {
         super();
-        setPai( pai );
+        this.pai = pai ;
     }
 
     public Node getPai() {
