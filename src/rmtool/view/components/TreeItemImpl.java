@@ -7,25 +7,19 @@
 package rmtool.view.components;
 
 import javafx.scene.control.TreeItem;
-import rmtool.model.NomeEditavel;
 
 /**
  *
  * @author jonimane
  */
 public class TreeItemImpl extends TreeItem<String> {
-    private NomeEditavel objetoEditavel;
+    private Object objeto;
     
-    public NomeEditavel getObjetoEditavel()
-    {
-        return objetoEditavel;
+    public Object getObjeto() {
+        return objeto;
     }
-    
-    public TreeItemImpl setObjetoEditavel( NomeEditavel objeto )
-    {
-        objetoEditavel = objeto;
-        setValue( objeto.getNomeEditavel() );
-        
-        return this;
+
+    public void setObjeto(Object objeto) {
+        this.objeto = objeto;
     }
 }

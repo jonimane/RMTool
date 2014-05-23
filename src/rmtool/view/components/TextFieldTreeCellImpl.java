@@ -5,14 +5,17 @@
  */
 package rmtool.view.components;
 
+import java.util.ArrayList;
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeCell;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.WindowEvent;
+import rmtool.model.NomeEditavel;
 
 /**
  *
@@ -20,23 +23,110 @@ import javafx.scene.input.KeyEvent;
  */
 public class TextFieldTreeCellImpl extends TreeCell<String> {
     private TextField textField;
-    private ContextMenu addMenu = new ContextMenu();
+    private ContextMenuImpl menu;
 
     public TextFieldTreeCellImpl() {
-        MenuItem addMenuItem = new MenuItem("...");
-        addMenu.getItems().add(addMenuItem);
+        menu = new ContextMenuImpl(this);
         
-        addMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+        // Adicionar Item para gerar o evento OnShowing
+        MenuItem addMenuItem = new MenuItem("Carregando...");
+        menu.getItems().add(addMenuItem);
+        
+        menu.setOnShowing( menuGerarItens() );
+    }
+    
+    public EventHandler<WindowEvent> menuGerarItens()
+    {
+        return new EventHandler<WindowEvent>() {
             @Override
-            public void handle(ActionEvent event) {
+            public void handle(WindowEvent event) {
+                ContextMenuImpl menu = ( ContextMenuImpl ) event.getSource();
+                menu.getItems().clear();
                 
+                TextFieldTreeCellImpl pai = (TextFieldTreeCellImpl) menu.getPai();
+                TreeItemImpl ti = ( TreeItemImpl ) pai.getTreeItem();
+                
+                List<MenuItem> novosItens = new ArrayList<>();
+                
+                switch( ti.getObjeto().getClass().getSimpleName() )
+                {
+                    case "Projeto":
+                        novosItens.add( criarMenu("Editar", new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                
+                            }
+                        }));
+                        
+                        novosItens.add( criarMenu("Excluir", new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                
+                            }
+                        }));
+                        
+                        novosItens.add( criarMenu("Rastreabilidade", new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                
+                            }
+                        }));
+                    break;
+                    
+                    case "TipoRequisito":
+                        novosItens.add( criarMenu("Criar Requisito", new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                
+                            }
+                        }));
+                    break;
+                    
+                    case "Requisito":
+                        novosItens.add( criarMenu("Editar", new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                
+                            }
+                        }) );
+                        novosItens.add( criarMenu("Excluir", new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                
+                            }
+                        }));
+                    break;
+                    
+                    default:
+                        
+                    break;
+                }
+                
+                if( novosItens.size() == 0 )
+                {
+                    MenuItem item = new MenuItem("...");
+                    novosItens.add( item );
+                }
+                
+                menu.getItems().addAll( novosItens );
             }
-        });
+        };
+    }
+    
+    public MenuItem criarMenu( String titulo, EventHandler<ActionEvent> acao )
+    {
+        MenuItem mi = new MenuItem();
+        mi.setText(titulo);
+        mi.setOnAction( acao );
+        
+        return mi;
     }
     
     @Override
     public void startEdit() {
-        if( !( getTreeItem() instanceof TreeItemImpl ) )
+        TreeItemImpl ti = (TreeItemImpl) getTreeItem();
+        
+        if( !( ti.getObjeto() instanceof NomeEditavel ) )
         {
             return;
         }
@@ -82,7 +172,7 @@ public class TextFieldTreeCellImpl extends TreeCell<String> {
                 setGraphic(getTreeItem().getGraphic());
                 
                 if ( getTreeItem().getParent() != null ){
-                    setContextMenu(addMenu);
+                    setContextMenu(menu);
                 }
             }
         }

@@ -21,9 +21,8 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
+import rmtool.model.NomeEditavel;
 import rmtool.model.SessionManager;
 import rmtool.model.TabManager;
 import rmtool.model.Telas;
@@ -103,7 +102,8 @@ public class AppController implements Initializable {
         
         for (Projeto projeto : projetos) {
             temp = new TreeItemImpl();
-            temp.setObjetoEditavel( projeto );
+            temp.setValue( projeto.getNome() );
+            temp.setObjeto( projeto );
             temp.getChildren().addAll( gerarListaRequisitos( projeto ) );
             lista.add( temp );
         }
@@ -111,7 +111,7 @@ public class AppController implements Initializable {
         return lista;
     }
     
-    public List<TreeItem<String>> gerarListaRequisitos( Projeto p )
+    public List<TreeItemImpl> gerarListaRequisitos( Projeto p )
     {
         RequisitoDAO requisitoDAO = new RequisitoDAO();
         List<Requisito> requisitos = requisitoDAO.procurar( p );
@@ -119,15 +119,16 @@ public class AppController implements Initializable {
         return gerarListaTipoRequisito( requisitos );
     }
     
-    public List<TreeItem<String>> gerarListaTipoRequisito( List<Requisito> requisitos )
+    public List<TreeItemImpl> gerarListaTipoRequisito( List<Requisito> requisitos )
     {
-        List<TreeItem<String>> lista = new ArrayList<>();
-        TreeItem<String> temp = null;
+        List<TreeItemImpl> lista = new ArrayList<>();
+        TreeItemImpl temp = null;
         
         for( TipoRequisito tipo : TipoRequisito.values() )
         {
-            temp = new TreeItem<>();
+            temp = new TreeItemImpl();
             temp.setValue( tipo.toString() );
+            temp.setObjeto( tipo );
             temp.getChildren().addAll( selecionarRequisitos(requisitos, tipo) );
             lista.add( temp );
         }
@@ -138,15 +139,16 @@ public class AppController implements Initializable {
     public List<TreeItemImpl> selecionarRequisitos( List<Requisito> requisitos, TipoRequisito tipo )
     {
         List<TreeItemImpl> selecao = new ArrayList<>();
-        TreeItemImpl tiTemp = null;
+        TreeItemImpl temp = null;
         
         for( Requisito requisito : requisitos )
         {
             if( requisito.getTipoRequisito() == tipo )
             {
-                tiTemp = new TreeItemImpl();
-                tiTemp.setObjetoEditavel( requisito );
-                selecao.add( tiTemp );
+                temp = new TreeItemImpl();
+                temp.setValue( requisito.getNome() );
+                temp.setObjeto( requisito );
+                selecao.add( temp );
             }
         }
         
@@ -172,21 +174,15 @@ public class AppController implements Initializable {
                 
                 if( ti instanceof TreeItemImpl )
                 {
-                    ((TreeItemImpl) ti).getObjetoEditavel().setNomeEditavel( event.getNewValue() ).salvar();
+                    Object o = ((TreeItemImpl) ti).getObjeto();
+                    
+                    if( o instanceof NomeEditavel )
+                    {
+                        ((NomeEditavel)o).setNomeEditavel( event.getNewValue() ).salvar();
+                    }
                 }
             }
         };
-    }
-    
-    public void onDoubleClick( MouseEvent event )
-    {
-        if( event.getButton().equals( MouseButton.PRIMARY ) )
-        {
-            if(event.getClickCount() == 2)
-            {
-                
-            }
-        }
     }
 
     private ContextMenu tvListaGerarContextMenu() {
