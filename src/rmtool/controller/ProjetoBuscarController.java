@@ -46,6 +46,7 @@ public class ProjetoBuscarController implements Initializable, Controller {
         proDao.buscarProjeto(n);
         
         return pro;
+        
     }
     
     @FXML
@@ -59,11 +60,11 @@ public class ProjetoBuscarController implements Initializable, Controller {
         projetoDAO.alterar(pro);
     }
     
+    @FXML
     public void fecharTela()
     {
         TabManager.getInstance().fechar(this);
     }
-    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

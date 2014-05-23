@@ -7,11 +7,9 @@
 package rmtool.model.dao;
 
 import java.util.List;
-import javax.swing.JOptionPane;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-import rmtool.model.bean.Requisito;
 import rmtool.model.bean.Usuario;
 
 /**

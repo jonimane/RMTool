@@ -16,9 +16,12 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import name.antonsmirnov.javafx.dialog.Dialog;
 import rmtool.model.Controller;
+import rmtool.model.TabManager;
 import rmtool.model.bean.Projeto;
 import rmtool.model.dao.ProjetoDAO;
 /**
@@ -35,21 +38,37 @@ public class ProjetoFormController implements Initializable, Controller {
     
     @FXML
     public TextField nomeProjeto;
+    @FXML
     public TextArea descricaoProjeto;
+    @FXML
+    public Button cancelar;
     
     @FXML
     public void criarProjeto(ActionEvent event) {
         
         Projeto pro = new Projeto();
+        pro.setNome(nomeProjeto.getText());
+        pro.setDescricao(descricaoProjeto.getText());
+        
         ProjetoDAO proDao = new ProjetoDAO();
         
-        pro.setNome("nomeProjeto");
-        pro.setDescricao("descricaoProjeto");
+       
+        if( pro.getNome().length() == 0 || pro.getDescricao().length() == 0 ){
+            Dialog.showError("RMTool", "Preencha todos os campos para continuar!!");
+        }else{
+            Dialog.showInfo("RMTool", "Projeto criado com sucesso!!"); 
+            proDao.criar(pro);
+            
+            nomeProjeto.clear();
+            descricaoProjeto.clear();
+        }
         
-        proDao.criar(pro);
-
     }
-    
+    @FXML
+    public void fecharTela()
+    {
+        TabManager.getInstance().fechar(this);
+    }
     //@FXML void AlterarProjeto
     
     @Override
