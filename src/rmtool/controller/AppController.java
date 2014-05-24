@@ -41,7 +41,7 @@ import rmtool.view.components.TreeItemImpl;
  *
  * @author jonimane
  */
-public class AppController implements Initializable, Controller{
+public class AppController implements Initializable {
 
     @FXML
     public TabPane tpPrincipal;
@@ -62,26 +62,20 @@ public class AppController implements Initializable, Controller{
             }
         });
         
-        Usuario u = (Usuario) SessionManager.getInstance().get("usuario");
-        List<Projeto> projetos = carregarProjetosUsuario(u);
-        atualizarLista(projetos);
+        tvListaGerar();
     }
     
-    public List<Projeto> carregarProjetosUsuario( Usuario u )
-    {
-        ProjetoDAO projetoDAO = new ProjetoDAO();
-        
-        return projetoDAO.procurar(u);
-    }
-    
-    public void atualizarLista( List<Projeto> projetos )
+    public void tvListaGerar()
     {
         // Criando nó root
         TreeItem<String> root = new TreeItem<>();
         root.setExpanded(true);
         
+        // Setando nó root na TreeView
+        tvLista.setRoot(root);
+        
         // Adicionando Itens ao nó root
-        root.getChildren().addAll( gerarListaProjetos( projetos ) );
+        tvListaAtualizar( root );
         
         // Injetando TreeCell customizada
         tvLista.setCellFactory( tvListaSetCellFactory() );
@@ -91,9 +85,27 @@ public class AppController implements Initializable, Controller{
         
         // Adicionar ContextMenu na TreeView
         tvLista.setContextMenu( tvListaGerarContextMenu() );
+    }
+    
+    public void tvListaAtualizar()
+    {
+        tvListaAtualizar( tvLista.getRoot() );
+    }
+    
+    public void tvListaAtualizar( TreeItem<String> root )
+    {
+        Usuario u = (Usuario) SessionManager.getInstance().get("usuario");
+        List<Projeto> projetos = carregarProjetosUsuario(u);
         
-        // Setando nó root na TreeView
-        tvLista.setRoot(root);
+        root.getChildren().clear();
+        root.getChildren().addAll( gerarListaProjetos( projetos ) );
+    }
+    
+    public List<Projeto> carregarProjetosUsuario( Usuario u )
+    {
+        ProjetoDAO projetoDAO = new ProjetoDAO();
+        
+        return projetoDAO.procurar(u);
     }
     
     public List<TreeItemImpl> gerarListaProjetos( List<Projeto> projetos )
@@ -105,6 +117,7 @@ public class AppController implements Initializable, Controller{
             temp = new TreeItemImpl();
             temp.setValue( projeto.getNome() );
             temp.setObjeto( projeto );
+            temp.setExpanded( true );
             temp.getChildren().addAll( gerarListaRequisitos( projeto ) );
             lista.add( temp );
         }
@@ -130,6 +143,7 @@ public class AppController implements Initializable, Controller{
             temp = new TreeItemImpl();
             temp.setValue( tipo.toString() );
             temp.setObjeto( tipo );
+            temp.setExpanded( true );
             temp.getChildren().addAll( selecionarRequisitos(requisitos, tipo) );
             lista.add( temp );
         }
@@ -144,11 +158,12 @@ public class AppController implements Initializable, Controller{
         
         for( Requisito requisito : requisitos )
         {
-            if( requisito.getTipoRequisito() == tipo )
+            if( TipoRequisito.parse( requisito.getTipo() ) == tipo )
             {
                 temp = new TreeItemImpl();
                 temp.setValue( requisito.getNome() );
                 temp.setObjeto( requisito );
+                temp.setExpanded( true );
                 selecao.add( temp );
             }
         }

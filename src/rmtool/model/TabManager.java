@@ -8,9 +8,7 @@ package rmtool.model;
 
 import rmtool.model.config.Telas;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -102,17 +100,15 @@ public class TabManager {
         return lista;
     }
     
-    public List<Controller> get(Tab t)
+    public Controller get(Tab t)
     {
-        List<Controller> keys = new ArrayList<>();
-        
         for (Map.Entry<Controller, Tab> entry : lista.entrySet()) {
             if( entry.getValue() == t )
             {
-                keys.add( entry.getKey() );
+                return entry.getKey();
             }
         }
         
-        return keys;
+        return null;
     }
 }

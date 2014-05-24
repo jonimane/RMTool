@@ -9,6 +9,7 @@ package rmtool.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
+import rmtool.model.AbstractController;
 import rmtool.model.Controller;
 
 /**
@@ -16,7 +17,7 @@ import rmtool.model.Controller;
  *
  * @author jonimane
  */
-public class RequisitosListarController implements Initializable, Controller {
+public class RequisitosListarController extends AbstractController implements Initializable {
 
     /**
      * Initializes the controller class.

@@ -18,6 +18,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
 import rmtool.model.NomeEditavel;
+import rmtool.model.Prioridade;
+import rmtool.model.Situacao;
 import rmtool.model.TipoRequisito;
 import rmtool.model.dao.RequisitoDAO;
 
@@ -33,7 +35,7 @@ public class Requisito implements Serializable, NomeEditavel {
     private String descricao;
     private Byte prioridade;
     private Byte situacao;
-    private String versao;
+    private Integer versao;
     private Byte tipo;
     private Date criacao;
     private Projeto projeto;
@@ -70,6 +72,13 @@ public class Requisito implements Serializable, NomeEditavel {
         return prioridade;
     }
 
+    public void setPrioridade(Prioridade prioridade) {
+        if( prioridade != null )
+        {
+            this.prioridade = prioridade.toByte();
+        }
+    }
+
     public void setPrioridade(Byte prioridade) {
         this.prioridade = prioridade;
     }
@@ -78,15 +87,22 @@ public class Requisito implements Serializable, NomeEditavel {
         return situacao;
     }
 
+    public void setSituacao(Situacao situacao) {
+        if( situacao != null )
+        {
+            this.situacao = situacao.toByte();
+        }
+    }
+
     public void setSituacao(Byte situacao) {
         this.situacao = situacao;
     }
 
-    public String getVersao() {
+    public Integer getVersao() {
         return versao;
     }
 
-    public void setVersao(String versao) {
+    public void setVersao(Integer versao) {
         this.versao = versao;
     }
 
@@ -94,19 +110,15 @@ public class Requisito implements Serializable, NomeEditavel {
         return tipo;
     }
 
+    public void setTipo(TipoRequisito tipo) {
+        if( tipo != null )
+        {
+            this.tipo = tipo.toByte();
+        }
+    }
+
     public void setTipo(Byte tipo) {
         this.tipo = tipo;
-    }
-    
-    @Transient
-    public TipoRequisito getTipoRequisito()
-    {
-        return TipoRequisito.parse( getTipo() );
-    }
-    
-    public void setTipoRequisito( TipoRequisito tipo )
-    {
-        setTipo( tipo.toByte() );
     }
 
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)

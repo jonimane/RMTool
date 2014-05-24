@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import rmtool.model.Controller;
+import rmtool.model.AbstractFormController;
 import rmtool.model.bean.Projeto;
 import rmtool.model.dao.ProjetoDAO;
 
@@ -20,8 +20,7 @@ import rmtool.model.dao.ProjetoDAO;
  *
  * @author Haroldo&Faby
  */
-public class ProjetoAlterarController implements Initializable, Controller {
-
+public class ProjetoAlterarController extends AbstractFormController<Projeto> implements Initializable {
     @FXML
     private void AlterarProjeto(ActionEvent event) throws Exception {
         
@@ -33,11 +32,19 @@ public class ProjetoAlterarController implements Initializable, Controller {
         projetoDAO.alterar(pro);
     }
     
-    
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @Override
+    public void carregarBean() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void atualizarBean() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

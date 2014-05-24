@@ -8,8 +8,8 @@ package rmtool.model;
 
 /**
  *
- * @author Haroldo&Faby
+ * @author jonimane
  */
-public interface Controller {
-    public void fechar();
+public interface FormController<T> extends Controller {
+    public void editar( T o );
 }

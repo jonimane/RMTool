@@ -10,17 +10,17 @@ package rmtool.model;
  *
  * @author jonimane
  */
-public enum TipoRequisito {
-    Funcional(""),
-    NaoFuncional("Não Funcional"),
-    Usuario("Usuário"),
-    Sistema("");
+public enum Situacao {
+    Concluido("Concluído"),
+    Aberto("Em Aberto"),
+    Andamento("Em Andamento"),
+    Fechado("Fechado");
     
     private Byte n;
-    private String nome;
+    private String rotulo;
     
-    public static TipoRequisito parse(Byte tipo) {
-        for (TipoRequisito t : TipoRequisito.values() ) {
+    public static Situacao parse(Byte tipo) {
+        for (Situacao t : Situacao.values() ) {
             if( t.toByte().equals( tipo ) )
             {
                 return t;
@@ -30,21 +30,14 @@ public enum TipoRequisito {
         return null;
     }
     
-    private TipoRequisito( String t )
-    {
-        if( t.length() == 0 )
-        {
-            t = name();
-        }
-        
-        n = Defaults.i ++;
-        nome = t;
+    private Situacao( String r ) {
+        rotulo = r;
+        n = Situacao.Defaults.i ++;
     }
-    
+
     @Override
-    public String toString()
-    {
-        return nome;
+    public String toString() {
+        return rotulo;
     }
     
     public Byte toByte()

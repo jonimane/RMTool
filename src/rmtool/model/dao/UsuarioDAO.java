@@ -16,8 +16,19 @@ import rmtool.model.bean.Usuario;
  *
  * @author jonimane
  */
-public class UsuarioDAO {
-
+public class UsuarioDAO
+{
+    public List<Usuario> listar()
+    {
+        Session s;
+        
+        s = HibernateUtilDAO.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        List<Usuario> usuarios = s.createCriteria(Usuario.class).list();
+        
+        return usuarios;
+    }
+    
     public void add (Usuario user){
         Session session = HibernateUtilDAO.getSessionFactory().getCurrentSession();
         

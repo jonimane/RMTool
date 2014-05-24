@@ -8,8 +8,12 @@ package rmtool.model;
 
 /**
  *
- * @author Haroldo&Faby
+ * @author jonimane
  */
-public interface Controller {
-    public void fechar();
+public class AbstractController implements Controller {
+    @Override
+    public void fechar() {
+        TabManager.getInstance().fechar( this );
+    }
+    
 }

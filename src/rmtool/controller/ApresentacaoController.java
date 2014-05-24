@@ -9,6 +9,7 @@ package rmtool.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
+import rmtool.model.AbstractController;
 import rmtool.model.Controller;
 
 /**
@@ -16,14 +17,13 @@ import rmtool.model.Controller;
  *
  * @author jonimane
  */
-public class ApresentacaoController implements Initializable, Controller {
-
+public class ApresentacaoController extends AbstractController implements Initializable {
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    } 
     
 }

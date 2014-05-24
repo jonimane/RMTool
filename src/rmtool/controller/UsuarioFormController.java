@@ -13,8 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import rmtool.model.Controller;
-import rmtool.model.TabManager;
+import rmtool.model.AbstractFormController;
 import rmtool.model.bean.Usuario;
 import rmtool.model.dao.UsuarioDAO;
 
@@ -23,8 +22,7 @@ import rmtool.model.dao.UsuarioDAO;
  *
  * @author Haroldo&Faby
  */
-public class UsuarioFormController implements Initializable, Controller {
-
+public class UsuarioFormController extends AbstractFormController implements Initializable {
    @FXML
    private TextField usuarioNome;
    @FXML 
@@ -54,12 +52,22 @@ public class UsuarioFormController implements Initializable, Controller {
    @FXML
    private void cancelar( ActionEvent event )
    {
-       TabManager.getInstance().fechar( this );
+       fechar();
    }
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @Override
+    public void carregarBean() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void atualizarBean() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import rmtool.model.AbstractController;
 import rmtool.model.Controller;
 import rmtool.model.TabManager;
 import rmtool.model.bean.Projeto;
@@ -24,12 +25,12 @@ import rmtool.model.dao.ProjetoDAO;
  *
  * @author Haroldo&Faby
  */
-public class ProjetoBuscarController implements Initializable, Controller {
+public class ProjetoBuscarController extends AbstractController implements Initializable {
 
     @FXML
     private TextField buscarNome;
     @FXML 
-    private  TextArea buscarDescricao ;
+    private  TextArea buscarDescricao;
 
     /**
      * Initializes the controller class.
@@ -63,7 +64,7 @@ public class ProjetoBuscarController implements Initializable, Controller {
     @FXML
     public void fecharTela()
     {
-        TabManager.getInstance().fechar(this);
+        fechar();
     }
     
     @Override

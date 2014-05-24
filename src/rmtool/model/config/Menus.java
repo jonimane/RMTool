@@ -11,6 +11,8 @@ import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import rmtool.controller.RequisitoFormController;
 import rmtool.model.TabManager;
 import rmtool.model.TipoRequisito;
 import rmtool.model.bean.Projeto;
@@ -48,7 +50,12 @@ public enum Menus {
                 return null;
         }
     }
-    
+
+    /**
+     * Método responsável por gerar os menus para um Projeto
+     * 
+     * @return List<MenuItem>
+     */
     public List<MenuItem> gerarProjeto()
     {
         List<MenuItem> lista = new ArrayList<>();
@@ -77,6 +84,11 @@ public enum Menus {
         return lista;
     }
     
+    /**
+     * Método responsável por gerar os menus para um Requisito
+     * 
+     * @return List<MenuItem>
+     */
     public List<MenuItem> gerarRequisito()
     {
         List<MenuItem> lista = new ArrayList<>();
@@ -85,6 +97,9 @@ public enum Menus {
             @Override
             public void handle(ActionEvent event) {
                 Requisito r = getRequisito();
+                TabManager tm = TabManager.getInstance();
+                Tab t = tm.criar( Telas.RequisitoForm );
+                ((RequisitoFormController) tm.get(t)).editar(r);
             }
         }));
         
@@ -98,6 +113,11 @@ public enum Menus {
         return lista;
     }
     
+    /**
+     * Método responsável por gerar os menus para um TipoRequisito
+     * 
+     * @return List<MenuItem>
+     */
     public List<MenuItem> gerarTipoRequisito()
     {
         List<MenuItem> lista = new ArrayList<>();
@@ -112,6 +132,11 @@ public enum Menus {
         return lista;
     }
 
+    /**
+     * Método responsável para retornar qual a TreeCell em que está acontecendo o evento
+     * 
+     * @return TextFieldTreeCellImpl
+     */
     public TextFieldTreeCellImpl getPai() {
         return pai;
     }
@@ -120,6 +145,11 @@ public enum Menus {
         this.pai = pai;
     }
     
+    /**
+     * Retorna o Projeto associado ao TreeItem
+     * 
+     * @return Projeto
+     */
     public Projeto getProjeto()
     {
         TreeItemImpl ti = ( TreeItemImpl ) pai.getTreeItem();
@@ -127,6 +157,11 @@ public enum Menus {
         return (Projeto) ti.getObjeto();
     }
     
+    /**
+     * Retorna o Requisito associado ao TreeItem
+     * 
+     * @return Projeto
+     */
     public Requisito getRequisito()
     {
         TreeItemImpl ti = ( TreeItemImpl ) pai.getTreeItem();
@@ -134,6 +169,11 @@ public enum Menus {
         return (Requisito) ti.getObjeto();
     }
     
+    /**
+     * Retorna o TipoRequisito associado ao TreeItem
+     * 
+     * @return Projeto
+     */
     public TipoRequisito getTipoRequisito()
     {
         TreeItemImpl ti = ( TreeItemImpl ) pai.getTreeItem();

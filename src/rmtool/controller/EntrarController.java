@@ -24,7 +24,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import name.antonsmirnov.javafx.dialog.Dialog;
 import rmtool.RMTool;
-import rmtool.model.Controller;
 import rmtool.model.SessionManager;
 import rmtool.model.TabManager;
 import rmtool.model.config.Telas;
@@ -36,7 +35,7 @@ import rmtool.model.dao.UsuarioDAO;
  *
  * @author jonimane
  */
-public class EntrarController implements Initializable, Controller {
+public class EntrarController implements Initializable {
     @FXML
     public Button btnEntrar;
     @FXML

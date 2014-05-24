@@ -6,11 +6,6 @@
 
 package rmtool.controller;
 
-/*import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-*/
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -20,7 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import name.antonsmirnov.javafx.dialog.Dialog;
-import rmtool.model.Controller;
+import rmtool.model.AbstractFormController;
 import rmtool.model.TabManager;
 import rmtool.model.bean.Projeto;
 import rmtool.model.dao.ProjetoDAO;
@@ -30,8 +25,7 @@ import rmtool.model.dao.ProjetoDAO;
  *
  * @author Haroldo&Faby
  */
-public class ProjetoFormController implements Initializable, Controller {
-
+public class ProjetoFormController extends AbstractFormController<Projeto> implements Initializable {
     /**
      * Initializes the controller class.
      */
@@ -44,8 +38,8 @@ public class ProjetoFormController implements Initializable, Controller {
     public Button cancelar;
     
     @FXML
-    public void criarProjeto(ActionEvent event) {
-        
+    public void criarProjeto(ActionEvent event)
+    {    
         Projeto pro = new Projeto();
         pro.setNome(nomeProjeto.getText());
         pro.setDescricao(descricaoProjeto.getText());
@@ -64,10 +58,11 @@ public class ProjetoFormController implements Initializable, Controller {
         }
         
     }
+    
     @FXML
     public void fecharTela()
     {
-        TabManager.getInstance().fechar(this);
+        fechar();
     }
     //@FXML void AlterarProjeto
     
@@ -75,5 +70,14 @@ public class ProjetoFormController implements Initializable, Controller {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
+
+    @Override
+    public void carregarBean() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }    
+
+    @Override
+    public void atualizarBean() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

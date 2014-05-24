@@ -309,6 +309,10 @@ public class Dialog extends Stage {
             stage.buttonsPanel.getChildren().add(stage.okButton);
             return this;
         }
+        
+        protected Builder addOkButton(EventHandler actionHandler) {
+            return addConfirmationButton(getString("buttonlabel.ok"), actionHandler);
+        }
 
         public Builder addConfirmationButton(String buttonCaption, final EventHandler actionHandler) {
             Button confirmationButton = new Button(buttonCaption);
@@ -380,18 +384,30 @@ public class Dialog extends Stage {
      * 
      * @param title dialog title
      * @param message dialog message
+     * @param actionHandler event after message
      * @param owner parent window
      */
-    public static void showInfo(String title, String message, Window owner) {
+    public static void showInfo(String title, String message, EventHandler actionHandler, Window owner) {
         new Builder()
             .create()
             .setOwner(owner)
             .setTitle(title)
             .setInfoIcon()
             .setMessage(message)            
-            .addOkButton()
-                .build()
-                    .show();
+            .addOkButton(actionHandler)
+            .build()
+            .show();
+    }
+    
+    /**
+     * Show information dialog box as parentWindow child
+     * 
+     * @param title dialog title
+     * @param message dialog message
+     * @param actionHandler event after message
+     */
+    public static void showInfo(String title, String message, EventHandler actionHandler) {
+        showInfo(title, message, actionHandler, null);
     }
     
     /**
@@ -401,7 +417,7 @@ public class Dialog extends Stage {
      * @param message dialog message
      */
     public static void showInfo(String title, String message) {
-        showInfo(title, message, null);
+        showInfo(title, message, null, null);
     }
 
     /**

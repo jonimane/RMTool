@@ -9,21 +9,19 @@ package rmtool.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
-import rmtool.model.Controller;
+import rmtool.model.AbstractController;
 
 /**
  * FXML Controller class
  *
  * @author Haroldo&Faby
  */
-public class UsuarioListarController implements Initializable, Controller {
-
+public class UsuarioListarController extends AbstractController implements Initializable {
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
 }

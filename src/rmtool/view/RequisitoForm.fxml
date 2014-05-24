@@ -2,10 +2,81 @@
 
 <?import java.lang.*?>
 <?import java.util.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="rmtool.controller.RequisitoFormController">
-    
+<AnchorPane id="AnchorPane" prefHeight="576.0" prefWidth="696.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="rmtool.controller.RequisitoFormController">
+  <children>
+    <GridPane id="GridPane" fx:id="gpPainel" prefHeight="518.0" prefWidth="593.0" AnchorPane.leftAnchor="52.0" AnchorPane.rightAnchor="51.0" AnchorPane.topAnchor="72.0">
+      <children>
+        <Label fx:id="lblId" text="ID" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label text="Nome" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <Label text="Descrição" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <Label text="Prioridade" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <Label text="Situacao" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <Label text="Tipo" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label text="Usuario" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <Label text="Criaçao" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+        <AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.valignment="TOP">
+          <children>
+            <TextField fx:id="txtId" disable="true" layoutX="0.0" layoutY="8.0" prefWidth="71.0" />
+          </children>
+        </AnchorPane>
+        <TextField fx:id="txtNome" prefWidth="490.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+        <HBox id="HBox" alignment="CENTER" prefHeight="32.0" prefWidth="505.0" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="8">
+          <children>
+            <Button fx:id="btnSalvar" mnemonicParsing="false" onAction="#salvar" text="Salvar" />
+            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
+          </children>
+        </HBox>
+        <ComboBox fx:id="cbPrioridade" prefHeight="21.0" prefWidth="129.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+          <items>
+            <FXCollections fx:factory="observableArrayList" />
+          </items>
+        </ComboBox>
+        <ComboBox fx:id="cbSituacao" prefHeight="21.0" prefWidth="129.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+          <items>
+            <FXCollections fx:factory="observableArrayList" />
+          </items>
+        </ComboBox>
+        <ComboBox fx:id="cbTipo" prefHeight="21.0" prefWidth="225.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+          <items>
+            <FXCollections fx:factory="observableArrayList" />
+          </items>
+        </ComboBox>
+        <ComboBox fx:id="cbUsuario" prefHeight="21.0" prefWidth="129.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+          <items>
+            <FXCollections fx:factory="observableArrayList" />
+          </items>
+        </ComboBox>
+        <TextField fx:id="txtCriacao" prefWidth="129.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+        <HTMLEditor fx:id="heDescricao" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" prefHeight="200.0" prefWidth="506.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.0" minWidth="10.0" prefWidth="87.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="335.0" minWidth="10.0" prefWidth="225.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="335.0" minWidth="10.0" prefWidth="281.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="41.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="33.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="211.0" minHeight="10.0" prefHeight="211.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="42.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+    <Label fx:id="lblTitulo" text="Requisito" AnchorPane.leftAnchor="298.5" AnchorPane.rightAnchor="298.5" AnchorPane.topAnchor="35.0">
+      <font>
+        <Font size="24.0" />
+      </font>
+    </Label>
+  </children>
 </AnchorPane>
