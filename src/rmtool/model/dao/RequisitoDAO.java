@@ -7,6 +7,7 @@
 package rmtool.model.dao;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -21,6 +22,8 @@ import rmtool.model.bean.Requisito;
 public class RequisitoDAO {
     public void criar( Requisito r )
     {
+        r.setCriacao( Calendar.getInstance().getTime() );
+        
         Session s;
         
         s = HibernateUtilDAO.getSessionFactory().getCurrentSession();
@@ -37,6 +40,18 @@ public class RequisitoDAO {
         s.beginTransaction();
         s.merge(r);
         s.getTransaction().commit();
+    }
+    
+    public void salvar( Requisito r )
+    {
+        if( r.getId() == null)
+        {
+            criar(r);
+        }
+        else
+        {
+            alterar(r);
+        }
     }
     
     public void excluir( Requisito r )

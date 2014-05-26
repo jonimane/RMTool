@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
+import rmtool.controller.ProjetoFormController;
 import rmtool.controller.RequisitoFormController;
 import rmtool.model.TabManager;
 import rmtool.model.TipoRequisito;
@@ -25,6 +26,7 @@ import rmtool.view.components.TreeItemImpl;
  * @author jonimane
  */
 public enum Menus {
+    Root,
     Projeto,
     TipoRequisito,
     Requisito;
@@ -37,6 +39,9 @@ public enum Menus {
         
         switch( this )
         {
+            case Root:
+                return gerarRoot();
+                
             case Projeto:
                 return gerarProjeto();
 
@@ -49,6 +54,20 @@ public enum Menus {
             default:
                 return null;
         }
+    }
+    
+    public List<MenuItem> gerarRoot()
+    {
+        List<MenuItem> lista = new ArrayList<>();
+        
+        lista.add( gerarMenuItem("Adicionar Projeto", new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                TabManager.getInstance().criar( Telas.ProjetoForm );
+            }
+        }));
+        
+        return lista;
     }
 
     /**
@@ -63,14 +82,18 @@ public enum Menus {
         lista.add( gerarMenuItem("Editar", new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Projeto p = getProjeto();
+                Projeto p = getObjeto( getTI() );
+                
+                TabManager tm = TabManager.getInstance();
+                Tab t = tm.criar( Telas.ProjetoForm );
+                ((ProjetoFormController) tm.get(t)).editar(p);
             }
         }));
 
         lista.add( gerarMenuItem("Excluir", new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Projeto p = getProjeto();
+                Projeto p = getObjeto( getTI() );
             }
         }));
 
@@ -96,7 +119,7 @@ public enum Menus {
         lista.add( gerarMenuItem("Editar", new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Requisito r = getRequisito();
+                Requisito r = getObjeto( getTI() );
                 TabManager tm = TabManager.getInstance();
                 Tab t = tm.criar( Telas.RequisitoForm );
                 ((RequisitoFormController) tm.get(t)).editar(r);
@@ -106,7 +129,7 @@ public enum Menus {
         lista.add( gerarMenuItem("Excluir", new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Requisito r = getRequisito();
+                Requisito r = getObjeto( getTI() );
             }
         }));
         
@@ -125,7 +148,13 @@ public enum Menus {
         lista.add( gerarMenuItem("Criar Requisito", new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                TabManager.getInstance().criar( Telas.RequisitoForm );
+                Requisito r = new Requisito();
+                r.setTipo( (TipoRequisito) getObjeto( getTI() ) );
+                r.setProjeto( (Projeto) getObjeto( getTI().getParentTI() ) );
+                
+                TabManager tm = TabManager.getInstance();
+                Tab t = tm.criar( Telas.RequisitoForm );
+                ((RequisitoFormController) tm.get(t)).editar(r);
             }
         }));
         
@@ -145,40 +174,14 @@ public enum Menus {
         this.pai = pai;
     }
     
-    /**
-     * Retorna o Projeto associado ao TreeItem
-     * 
-     * @return Projeto
-     */
-    public Projeto getProjeto()
+    public TreeItemImpl getTI()
     {
-        TreeItemImpl ti = ( TreeItemImpl ) pai.getTreeItem();
-        
-        return (Projeto) ti.getObjeto();
+        return ( TreeItemImpl ) pai.getTreeItem();
     }
     
-    /**
-     * Retorna o Requisito associado ao TreeItem
-     * 
-     * @return Projeto
-     */
-    public Requisito getRequisito()
+    public <T> T getObjeto( TreeItemImpl ti )
     {
-        TreeItemImpl ti = ( TreeItemImpl ) pai.getTreeItem();
-        
-        return (Requisito) ti.getObjeto();
-    }
-    
-    /**
-     * Retorna o TipoRequisito associado ao TreeItem
-     * 
-     * @return Projeto
-     */
-    public TipoRequisito getTipoRequisito()
-    {
-        TreeItemImpl ti = ( TreeItemImpl ) pai.getTreeItem();
-        
-        return (TipoRequisito) ti.getObjeto();
+        return (T) ti.getObjeto();
     }
     
     public MenuItem gerarMenuItem( String titulo, EventHandler<ActionEvent> acao)

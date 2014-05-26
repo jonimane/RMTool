@@ -100,12 +100,12 @@ public class TabManager {
         return lista;
     }
     
-    public Controller get(Tab t)
+    public <T extends Controller> T get(Tab t)
     {
         for (Map.Entry<Controller, Tab> entry : lista.entrySet()) {
             if( entry.getValue() == t )
             {
-                return entry.getKey();
+                return (T) entry.getKey();
             }
         }
         

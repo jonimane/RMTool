@@ -73,7 +73,6 @@ public class RequisitoFormController extends AbstractFormController<Requisito> i
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         List<Usuario> usuarios = usuarioDAO.listar();
         
-        lblTitulo.setText("Criar Requisito");
         lblId.setVisible(false);
         txtId.setVisible(false);
         
@@ -108,18 +107,21 @@ public class RequisitoFormController extends AbstractFormController<Requisito> i
 
     @Override
     public void carregarBean() {
-        lblTitulo.setText("Alterar Requisito");
-        lblId.setVisible(true);
-        txtId.setVisible(true);
+        if( editando.getId() != null )
+        {
+            lblId.setVisible(true);
+            txtId.setVisible(true);
+
+            txtId.setText( editando.getId().toString() );
+            txtCriacao.setText( editando.getCriacao().toString() );
+        }
         
-        txtId.setText( editando.getId().toString() );
         cbTipo.getSelectionModel().select( TipoRequisito.parse( editando.getTipo() ) );
         cbPrioridade.getSelectionModel().select( Prioridade.parse( editando.getPrioridade() ) );
         txtNome.setText( editando.getNome() );
         heDescricao.setHtmlText( editando.getDescricao() );
         cbSituacao.getSelectionModel().select( Situacao.parse( editando.getSituacao() ) );
         cbUsuario.getSelectionModel().select( editando.getUsuario() );
-        txtCriacao.setText( editando.getCriacao().toString() );
     }
     
     @Override
@@ -142,7 +144,7 @@ public class RequisitoFormController extends AbstractFormController<Requisito> i
         try
         {
             RequisitoDAO requisitoDAO = new RequisitoDAO();
-            requisitoDAO.alterar(editando);
+            requisitoDAO.salvar(editando);
             TabManager.getInstance().getMain().tvListaAtualizar();
             
             Dialog.showInfo("RMTool", "Requisito salvo com sucesso!", new EventHandler() {

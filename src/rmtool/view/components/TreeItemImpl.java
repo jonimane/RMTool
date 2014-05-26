@@ -22,4 +22,14 @@ public class TreeItemImpl extends TreeItem<String> {
     public void setObjeto(Object objeto) {
         this.objeto = objeto;
     }
+    
+    public TreeItemImpl getParentTI()
+    {
+        if( getParent() instanceof TreeItemImpl )
+        {
+            return (TreeItemImpl) getParent();
+        }
+        
+        return null;
+    }
 }
