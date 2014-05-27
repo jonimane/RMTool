@@ -8,7 +8,6 @@ package rmtool.model.bean;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -130,9 +129,7 @@ public class Requisito implements Serializable, NomeEditavel {
         this.criacao = criacao;
     }
 
-    @ManyToOne(
-            cascade = CascadeType.ALL
-    )
+    @ManyToOne
     public Projeto getProjeto() {
         return projeto;
     }
@@ -141,9 +138,7 @@ public class Requisito implements Serializable, NomeEditavel {
         this.projeto = projeto;
     }
 
-    @ManyToOne(
-            cascade = CascadeType.ALL
-    )
+    @ManyToOne
     public Usuario getUsuario() {
         return usuario;
     }

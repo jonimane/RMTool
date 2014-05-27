@@ -31,7 +31,6 @@ public class TextFieldTreeCellImpl extends TreeCell<String> {
         // Adicionar Item para gerar o evento OnShowing
         MenuItem addMenuItem = new MenuItem("Carregando...");
         menu.getItems().add(addMenuItem);
-        
         menu.setOnShowing( menuGerarItens() );
     }
     
@@ -90,6 +89,7 @@ public class TextFieldTreeCellImpl extends TreeCell<String> {
             createTextField();
         }
         
+        setContextMenu(null);
         setText(null);
         setGraphic(textField);
         textField.requestFocus();
@@ -100,6 +100,7 @@ public class TextFieldTreeCellImpl extends TreeCell<String> {
     public void cancelEdit() {
         super.cancelEdit();
 
+        setContextMenu(menu);
         textField.setText(getItem());
         setText(getItem());
         setGraphic(getTreeItem().getGraphic());
@@ -124,7 +125,7 @@ public class TextFieldTreeCellImpl extends TreeCell<String> {
                 setText(getString());
                 setGraphic(getTreeItem().getGraphic());
                 
-                if ( getTreeItem().getParent() != null ){
+                if ( getTreeItem().getParent() != null ) {
                     setContextMenu(menu);
                 }
             }

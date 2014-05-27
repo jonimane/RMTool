@@ -83,9 +83,7 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    @ManyToMany(
-            cascade = {CascadeType.ALL}
-    )
+    @ManyToMany
     @JoinTable(
         name = "participa",
         joinColumns = {

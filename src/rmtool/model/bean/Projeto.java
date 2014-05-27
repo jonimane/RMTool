@@ -65,9 +65,7 @@ public class Projeto implements Serializable, NomeEditavel {
         this.descricao = descricao;
     }
     
-    @ManyToMany(
-            cascade = {CascadeType.ALL}
-    )
+    @ManyToMany
     @JoinTable(
         name = "participa",
         joinColumns = {

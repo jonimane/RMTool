@@ -9,16 +9,19 @@ package rmtool.model.config;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.Tab;
-import rmtool.controller.ProjetoFormController;
-import rmtool.controller.RequisitoFormController;
+import name.antonsmirnov.javafx.dialog.Dialog;
 import rmtool.model.AbstractFormController;
 import rmtool.model.TabManager;
 import rmtool.model.TipoRequisito;
 import rmtool.model.bean.Projeto;
 import rmtool.model.bean.Requisito;
+import rmtool.model.dao.ProjetoDAO;
+import rmtool.model.dao.RequisitoDAO;
 import rmtool.view.components.TextFieldTreeCellImpl;
 import rmtool.view.components.TreeItemImpl;
 
@@ -81,6 +84,23 @@ public enum Menus {
     {
         List<MenuItem> lista = new ArrayList<>();
         
+        lista.add( gerarMenuItem("Adicionar Colaborador", new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Projeto p = getObjeto( getTI() );
+                chamarTelaEditar(Telas.ProjetoForm, p);
+            }
+        }));
+
+        lista.add( gerarMenuItem("Rastreabilidade", new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            }
+        }));
+        
+        lista.add( gerarMenuSeparador() );
+        
         lista.add( gerarMenuItem("Editar", new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -92,14 +112,21 @@ public enum Menus {
         lista.add( gerarMenuItem("Excluir", new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Projeto p = getObjeto( getTI() );
-            }
-        }));
-
-        lista.add( gerarMenuItem("Rastreabilidade", new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
+                final Projeto p = getObjeto( getTI() );
                 
+                Dialog.buildConfirmation("Confirmar", "Deseja realmente excluir esse projeto?").addYesButton( new EventHandler<Event>() {
+                    @Override
+                    public void handle(Event t) {
+                        ProjetoDAO projetoDAO = new ProjetoDAO();
+                        projetoDAO.excluir(p);
+                        TabManager.getInstance().getMain().tvListaAtualizar();
+                    }
+                }).addNoButton( new EventHandler<Event>() {
+                    @Override
+                    public void handle(Event t) {
+                        
+                    }
+                }).build().show();
             }
         }));
         
@@ -126,7 +153,21 @@ public enum Menus {
         lista.add( gerarMenuItem("Excluir", new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Requisito r = getObjeto( getTI() );
+                final Requisito r = getObjeto( getTI() );
+                
+                Dialog.buildConfirmation("Confirmar", "Deseja realmente excluir esse requisito?").addYesButton( new EventHandler<Event>() {
+                    @Override
+                    public void handle(Event t) {
+                        RequisitoDAO requisitoDAO = new RequisitoDAO();
+                        requisitoDAO.excluir(r);
+                        TabManager.getInstance().getMain().tvListaAtualizar();
+                    }
+                }).addNoButton( new EventHandler<Event>() {
+                    @Override
+                    public void handle(Event t) {
+                        
+                    }
+                }).build().show();
             }
         }));
         
@@ -186,6 +227,13 @@ public enum Menus {
         return (T) ti.getObjeto();
     }
     
+    /**
+     * Gera um Menu de acordo com os parametros passados e BINDA o EventHandler enviado nele
+     * 
+     * @param titulo
+     * @param acao
+     * @return MenuItem
+     */
     public MenuItem gerarMenuItem( String titulo, EventHandler<ActionEvent> acao)
     {
         MenuItem mi = new MenuItem();
@@ -193,5 +241,15 @@ public enum Menus {
         mi.setOnAction( acao );
         
         return mi;
+    }
+    
+    /**
+     * Gera um separador de Menu
+     * 
+     * @return MenuItem
+     */
+    public MenuItem gerarMenuSeparador()
+    {
+        return new SeparatorMenuItem();
     }
 }

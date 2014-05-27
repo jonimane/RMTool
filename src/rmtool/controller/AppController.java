@@ -11,18 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.util.Callback;
-import rmtool.model.Controller;
 import rmtool.model.NomeEditavel;
 import rmtool.model.SessionManager;
 import rmtool.model.TabManager;
@@ -83,6 +80,8 @@ public class AppController implements Initializable {
         
         // Evento para verificar o suporte a editar item pelo TreeView
         tvLista.setOnEditCommit( tvListaSetOnEditCommit() );
+        tvLista.setOnEditCancel( tvListaSetOnEditCancel() );
+        tvLista.setOnEditStart( tvListaSetOnEditStart() );
         
         // Adicionar ContextMenu na TreeView
         tvLista.setContextMenu( tvListaGerarContextMenu() );
@@ -187,6 +186,8 @@ public class AppController implements Initializable {
         return new EventHandler<TreeView.EditEvent<String>>() {
             @Override
             public void handle(TreeView.EditEvent<String> event) {
+                tvLista.setContextMenu( tvListaGerarContextMenu() );
+                
                 TreeItem ti = event.getTreeItem();
                 
                 if( ti instanceof TreeItemImpl )
@@ -198,6 +199,26 @@ public class AppController implements Initializable {
                         ((NomeEditavel)o).setNomeEditavel( event.getNewValue() ).salvar();
                     }
                 }
+            }
+        };
+    }
+    
+    public EventHandler<TreeView.EditEvent<String>> tvListaSetOnEditCancel()
+    {
+        return new EventHandler<TreeView.EditEvent<String>>() {
+            @Override
+            public void handle(TreeView.EditEvent<String> event) {
+                tvLista.setContextMenu( tvListaGerarContextMenu() );
+            }
+        };
+    }
+    
+    public EventHandler<TreeView.EditEvent<String>> tvListaSetOnEditStart()
+    {
+        return new EventHandler<TreeView.EditEvent<String>>() {
+            @Override
+            public void handle(TreeView.EditEvent<String> event) {
+                tvLista.setContextMenu( null );
             }
         };
     }
