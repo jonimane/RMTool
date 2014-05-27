@@ -12,12 +12,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.web.HTMLEditor;
 import name.antonsmirnov.javafx.dialog.Dialog;
 import rmtool.model.AbstractFormController;
+import rmtool.model.SessionManager;
 import rmtool.model.TabManager;
 import rmtool.model.bean.Projeto;
+import rmtool.model.bean.Usuario;
 import rmtool.model.dao.ProjetoDAO;
 /**
 /**
@@ -29,55 +32,76 @@ public class ProjetoFormController extends AbstractFormController<Projeto> imple
     /**
      * Initializes the controller class.
      */
-    
+    @FXML
+    public Label lblId;
+    @FXML
+    public TextField txtId;
     @FXML
     public TextField nomeProjeto;
     @FXML
-    public TextArea descricaoProjeto;
+    public HTMLEditor descricaoProjeto;
     @FXML
-    public Button cancelar;
+    public Button btnCancelar;
+    @FXML
+    public Button btnSalvar;
     
     @FXML
-    public void criarProjeto(ActionEvent event)
-    {    
-        Projeto pro = new Projeto();
-        pro.setNome(nomeProjeto.getText());
-        pro.setDescricao(descricaoProjeto.getText());
+    public void salvar( ActionEvent event )
+    {
+        atualizarBean();
         
-        ProjetoDAO proDao = new ProjetoDAO();
-        
-       
-        if( pro.getNome().length() == 0 || pro.getDescricao().length() == 0 ){
-            Dialog.showError("RMTool", "Preencha todos os campos para continuar!!");
-        }else{
-            Dialog.showInfo("RMTool", "Projeto criado com sucesso!!"); 
-            proDao.criar(pro);
+        try {
+            ProjetoDAO projetoDAO = new ProjetoDAO();
             
-            nomeProjeto.clear();
-            descricaoProjeto.clear();
+            if( editando.getNome().length() == 0 || editando.getDescricao().length() == 0 )
+            {
+                Dialog.showError("RMTool", "Preencha todos os campos para continuar!!");
+            }
+            else
+            {
+                if( editando.getId() == null )
+                {
+                    Usuario usuarioLogado = SessionManager.getInstance().get("usuario");
+                    editando.getParticipantes().add( usuarioLogado );
+                }
+                
+                projetoDAO.salvar( editando );
+                TabManager.getInstance().getMain().tvListaAtualizar();
+                Dialog.showInfo("RMTool", "Projeto criado com sucesso!!"); 
+                fechar();
+            }
         }
-        
+        catch( Exception e )
+        {
+            Dialog.showInfo("RMTool", "Problema ao salvar Projeto!!");
+        }
     }
     
     @FXML
-    public void fecharTela()
+    public void cancelar( ActionEvent event )
     {
         fechar();
     }
-    //@FXML void AlterarProjeto
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @Override
     public void carregarBean() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }    
+        if( editando.getId() != null )
+        {
+            txtId.setText( editando.getId().toString() );
+        }
+        
+        descricaoProjeto.setHtmlText( editando.getDescricao() );
+        nomeProjeto.setText( editando.getNome() );
+    }
 
     @Override
     public void atualizarBean() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        editando.setDescricao( descricaoProjeto.getHtmlText() );
+        editando.setNome( nomeProjeto.getText() );
     }
 }

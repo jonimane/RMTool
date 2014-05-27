@@ -19,6 +19,13 @@ public abstract class AbstractFormController<T> extends AbstractController imple
         carregarBean();
     }
     
+    /**
+     * Método responsável por atualizar o Formulário de acordo com o Bean
+     */
     public abstract void carregarBean();
+    
+    /**
+     * Método responsável por atualizar o Bean de acordo com o Formulário
+     */
     public abstract void atualizarBean();
 }

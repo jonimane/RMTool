@@ -84,8 +84,7 @@ public class Usuario implements Serializable {
     }
 
     @ManyToMany(
-            targetEntity = Projeto.class,
-            cascade = CascadeType.ALL
+            cascade = {CascadeType.ALL}
     )
     @JoinTable(
         name = "participa",

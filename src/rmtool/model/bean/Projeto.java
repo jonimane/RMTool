@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -63,7 +65,18 @@ public class Projeto implements Serializable, NomeEditavel {
         this.descricao = descricao;
     }
     
-    @ManyToMany(mappedBy = "participaProjetos")
+    @ManyToMany(
+            cascade = {CascadeType.ALL}
+    )
+    @JoinTable(
+        name = "participa",
+        joinColumns = {
+            @JoinColumn(name = "projeto_id")
+        },
+        inverseJoinColumns = {
+            @JoinColumn(name = "usuario_id")
+        }
+    )
     public Set<Usuario> getParticipantes() {
         return participantes;
     }

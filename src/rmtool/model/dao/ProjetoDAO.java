@@ -39,6 +39,18 @@ public class ProjetoDAO {
         s.getTransaction().commit();
     }
     
+    public void salvar( Projeto p )
+    {
+        if( p.getId() == null )
+        {
+            criar(p);
+        }
+        else
+        {
+            alterar(p);
+        }
+    }
+    
     public void excluir( Projeto p )
     {
         Session s;

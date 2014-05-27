@@ -29,4 +29,9 @@ public class SessionManager extends HashMap<String, Object>{
         
         return sm;
     }
+    
+    public <T> T get( String o )
+    {
+        return (T) super.get( o );
+    }
 }
