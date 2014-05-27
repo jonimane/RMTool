@@ -81,6 +81,8 @@ public class ProjetoDAO {
         Criteria cri = s.createCriteria(Projeto.class);
         cri.add(Restrictions.eq("nome", Nome));
         
+        //List list = s.createCriteria(Projeto.class).add(Restrictions.eq("nome", Nome)).list();
+        
         return (Projeto) cri.list().get(0);
     }
     

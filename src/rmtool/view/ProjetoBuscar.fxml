@@ -30,8 +30,10 @@
         <Font size="24.0" />
       </font>
     </Label>
-    <Button layoutX="398.0" layoutY="331.0" mnemonicParsing="false" onAction="#AlterarProjeto" text="Alterar" />
-    <Button layoutX="466.0" layoutY="331.0" mnemonicParsing="false" text="Cancelar" />
-    <Button layoutX="477.0" layoutY="96.0" mnemonicParsing="false" onAction="#BucarProjetoNome" text="Buscar" />
+    <Button layoutX="340.0" layoutY="332.0" mnemonicParsing="false" onAction="#alterarProjeto" text="Alterar" />
+    <Button layoutX="466.0" layoutY="332.0" mnemonicParsing="false" onAction="#fecharTela" text="Cancelar" />
+    <Button layoutX="477.0" layoutY="96.0" mnemonicParsing="false" onAction="#buscarProjetoNome" text="Buscar" />
+    <Button layoutX="110.0" layoutY="332.0" mnemonicParsing="false" onAction="#limparCampos" text="Limpar Campos" />
+    <Button layoutX="403.0" layoutY="332.0" mnemonicParsing="false" onAction="#excluirProjeto" text="Excluir" />
   </children>
 </AnchorPane>

@@ -31,7 +31,6 @@ import rmtool.model.TipoRequisito;
 import rmtool.model.bean.Projeto;
 import rmtool.model.bean.Requisito;
 import rmtool.model.bean.Usuario;
-import rmtool.model.config.Menus;
 import rmtool.model.dao.ProjetoDAO;
 import rmtool.model.dao.RequisitoDAO;
 import rmtool.view.components.TextFieldTreeCellImpl;
@@ -59,7 +58,9 @@ public class AppController implements Initializable {
             @Override
             public void run() {
                 TabManager tm = TabManager.getInstance();
+
                 tm.criar( Telas.Apresentacao );
+                
             }
         });
         
@@ -204,7 +205,15 @@ public class AppController implements Initializable {
 
     private ContextMenu tvListaGerarContextMenu() {
         ContextMenu menu = new ContextMenu();
-        menu.getItems().addAll( Menus.Root.gerarItens(null));
+        MenuItem mi = new MenuItem("Adicionar Projeto");
+        menu.getItems().add(mi);
+        
+        mi.setOnAction( new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                TabManager.getInstance().criar( Telas.ProjetoForm );
+            }
+        });
         
         return menu;
     }

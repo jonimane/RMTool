@@ -7,6 +7,8 @@
 package rmtool.controller;
 
 import java.net.URL;
+import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,8 +16,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import rmtool.model.AbstractController;
-import rmtool.model.Controller;
-import rmtool.model.TabManager;
 import rmtool.model.bean.Projeto;
 import rmtool.model.dao.ProjetoDAO;
 
@@ -37,28 +37,56 @@ public class ProjetoBuscarController extends AbstractController implements Initi
      */
 
     @FXML
-    private Projeto buscarProjetoNome(ActionEvent event)throws Exception
+    private void buscarProjetoNome(ActionEvent event)throws Exception
     {
-        Projeto pro = new Projeto();
         ProjetoDAO proDao = new ProjetoDAO();
+             
+        List<Projeto> listaProjeto =  proDao.listar();
         
-        String n = pro.getNome();
-        
-        proDao.buscarProjeto(n);
-        
-        return pro;
-        
+        if (listaProjeto != null){ 
+            for (Iterator<Projeto> i =  listaProjeto.iterator(); i.hasNext(); )  
+            {    
+                Projeto p = i.next();  
+                    if (p.getNome().equals( buscarNome.getText())){
+                        buscarDescricao.setText(p.getDescricao());
+                    }          
+            } 
+        }  
     }
     
     @FXML
     private void alterarProjeto(ActionEvent event) throws Exception {
         
         Projeto pro = new Projeto();
-        ProjetoDAO projetoDAO = new ProjetoDAO();
+        pro.setNome(buscarNome.getText());
+        pro.setDescricao(buscarDescricao.getText());
         
-        pro.setNome("nome");
-        pro.setDescricao("descricao");
-        projetoDAO.alterar(pro);
+        ProjetoDAO proDao = new ProjetoDAO();
+        proDao.alterar(pro);
+    }
+    
+    @FXML
+    private void excluirProjeto (ActionEvent event)throws Exception{
+
+        ProjetoDAO proDao = new ProjetoDAO();
+             
+        List<Projeto> listaProjeto =  proDao.listar();
+        
+        if (listaProjeto != null){ 
+            for (Iterator<Projeto> i =  listaProjeto.iterator(); i.hasNext(); )  
+            {    
+                Projeto p = i.next();  
+                    if (p.getNome().equals( buscarNome.getText())){
+                        proDao.excluir(p);
+                    }          
+            } 
+        }  
+    }
+    
+    @FXML
+    private void limparCampos(ActionEvent event)throws Exception{
+        buscarNome.clear();
+        buscarDescricao.clear();
     }
     
     @FXML
@@ -70,7 +98,5 @@ public class ProjetoBuscarController extends AbstractController implements Initi
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
-    
+    }   
 }
