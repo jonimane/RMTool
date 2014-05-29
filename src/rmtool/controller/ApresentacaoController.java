@@ -10,7 +10,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import rmtool.model.AbstractController;
-import rmtool.model.Controller;
 
 /**
  * FXML Controller class

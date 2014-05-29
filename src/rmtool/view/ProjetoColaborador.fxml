@@ -9,13 +9,17 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="rmtool.controller.ProjetoColaboradorController">
   <children>
-    <Label layoutX="223.0" layoutY="14.0" text="Colaboradores">
+    <Label layoutX="223.0" layoutY="28.0" text="Colaboradores">
       <font>
         <Font size="24.0" />
       </font>
     </Label>
-    <Button fx:id="btnSalvar" layoutX="236.0" layoutY="360.0" mnemonicParsing="false" onAction="#salvar" text="Salvar" />
-    <Button fx:id="btnCancelar" layoutX="300.0" layoutY="360.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
-    <TableView fx:id="tvColaboradores" layoutX="14.0" layoutY="46.0" prefHeight="303.0" prefWidth="572.0" />
+    <HBox id="HBox" alignment="CENTER" layoutX="14.0" layoutY="360.0" prefWidth="572.0" spacing="8.0">
+      <children>
+        <Button fx:id="btnSalvar" mnemonicParsing="false" onAction="#salvar" text="Salvar" />
+        <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
+      </children>
+    </HBox>
+    <TableView fx:id="tvColaboradores" layoutX="14.0" layoutY="83.0" prefHeight="265.0" prefWidth="572.0" />
   </children>
 </AnchorPane>

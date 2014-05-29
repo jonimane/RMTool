@@ -111,4 +111,11 @@ public class TabManager {
         
         return null;
     }
+    
+    public <T> void chamarTelaEditar( Telas tela, T editando )
+    {
+        Tab t = criar(tela);
+        AbstractFormController controller = get(t);
+        controller.editar( editando );
+    }
 }

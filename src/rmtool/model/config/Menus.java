@@ -68,7 +68,7 @@ public enum Menus {
             @Override
             public void handle(ActionEvent event) {
                 Projeto p = new Projeto();
-                chamarTelaEditar(Telas.ProjetoForm, p);
+                TabManager.getInstance().chamarTelaEditar(Telas.ProjetoForm, p);
             }
         }));
         
@@ -88,7 +88,7 @@ public enum Menus {
             @Override
             public void handle(ActionEvent event) {
                 Projeto p = getObjeto( getTI() );
-                chamarTelaEditar(Telas.ProjetoColaborador, p);
+                TabManager.getInstance().chamarTelaEditar(Telas.ProjetoColaborador, p);
             }
         }));
 
@@ -105,7 +105,7 @@ public enum Menus {
             @Override
             public void handle(ActionEvent event) {
                 Projeto p = getObjeto( getTI() );
-                chamarTelaEditar(Telas.ProjetoForm, p);
+                TabManager.getInstance().chamarTelaEditar(Telas.ProjetoForm, p);
             }
         }));
 
@@ -146,7 +146,7 @@ public enum Menus {
             @Override
             public void handle(ActionEvent event) {
                 Requisito r = getObjeto( getTI() );
-                chamarTelaEditar(Telas.RequisitoForm, r);
+                TabManager.getInstance().chamarTelaEditar(Telas.RequisitoForm, r);
             }
         }));
         
@@ -189,19 +189,11 @@ public enum Menus {
                 Requisito r = new Requisito();
                 r.setTipo( (TipoRequisito) getObjeto( getTI() ) );
                 r.setProjeto( (Projeto) getObjeto( getTI().getParentTI() ) );
-                chamarTelaEditar(Telas.RequisitoForm, r);
+                TabManager.getInstance().chamarTelaEditar(Telas.RequisitoForm, r);
             }
         }));
         
         return lista;
-    }
-    
-    public <T> void chamarTelaEditar( Telas tela, T editando )
-    {
-        TabManager tm = TabManager.getInstance();
-        Tab t = tm.criar(tela);
-        AbstractFormController controller = tm.get(t);
-        controller.editar( editando );
     }
 
     /**

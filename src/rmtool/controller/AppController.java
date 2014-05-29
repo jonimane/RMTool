@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,6 +21,7 @@ import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.util.Callback;
+import name.antonsmirnov.javafx.dialog.Dialog;
 import rmtool.model.NomeEditavel;
 import rmtool.model.SessionManager;
 import rmtool.model.TabManager;
@@ -228,5 +230,35 @@ public class AppController implements Initializable {
         menu.getItems().addAll( Menus.Root.gerarItens(null));
         
         return menu;
+    }
+    
+    @FXML
+    public void menuUsuarioListar( ActionEvent event )
+    {
+        TabManager.getInstance().criar( Telas.UsuarioListar );
+    }
+    
+    @FXML
+    public void menuProjetoListar( ActionEvent event )
+    {
+        TabManager.getInstance().criar( Telas.ProjetoBuscar );
+    }
+    
+    @FXML
+    public void menuRequisitoListar( ActionEvent event )
+    {
+        TabManager.getInstance().criar( Telas.RequisitoListar );
+    }
+    
+    @FXML
+    public void menuAjudaSobre( ActionEvent event )
+    {
+        
+    }
+    
+    @FXML
+    public void menuAjudaApresentacao( ActionEvent event )
+    {
+        TabManager.getInstance().criar( Telas.Apresentacao );
     }
 }
