@@ -84,11 +84,11 @@ public enum Menus {
     {
         List<MenuItem> lista = new ArrayList<>();
         
-        lista.add( gerarMenuItem("Adicionar Colaborador", new EventHandler<ActionEvent>() {
+        lista.add( gerarMenuItem("Colaboradores", new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 Projeto p = getObjeto( getTI() );
-                chamarTelaEditar(Telas.ProjetoForm, p);
+                chamarTelaEditar(Telas.ProjetoColaborador, p);
             }
         }));
 

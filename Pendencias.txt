@@ -1,6 +1,6 @@
-- Associação de Usuários a Projetos
 - Integrar criação de Usuários
 - Integrar lista de todos projetos
 - Ajustar tabulação dos Formulários
+- Atualizar Documentação
 - Relatórios
 - Tela de Apresentação

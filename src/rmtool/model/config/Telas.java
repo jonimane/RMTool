@@ -15,6 +15,7 @@ public enum Telas {
     Apresentacao("Apresentação"),
     Entrar("Entrar"),
     ProjetoBuscar("Projeto - Buscar"),
+    ProjetoColaborador("Projeto - Colaboradores"),
     ProjetoForm("Projeto - Form"),
     RequisitoForm("Requisito - Form"),
     RequisitoListar("Requisito - Listar"),

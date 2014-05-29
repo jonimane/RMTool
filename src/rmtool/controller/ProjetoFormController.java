@@ -67,7 +67,7 @@ public class ProjetoFormController extends AbstractFormController<Projeto> imple
                 
                 projetoDAO.salvar( editando );
                 TabManager.getInstance().getMain().tvListaAtualizar();
-                Dialog.showInfo("RMTool", "Projeto criado com sucesso!!"); 
+                Dialog.showInfo("RMTool", "Projeto salvo com sucesso!!"); 
                 fechar();
             }
         }
