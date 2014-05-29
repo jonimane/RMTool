@@ -11,8 +11,12 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import rmtool.model.SessionManager;
+import rmtool.model.TabManager;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import name.antonsmirnov.javafx.dialog.Dialog;
 import rmtool.model.AbstractFormController;
 import rmtool.model.bean.Usuario;
 import rmtool.model.dao.UsuarioDAO;
@@ -20,34 +24,63 @@ import rmtool.model.dao.UsuarioDAO;
 /**
  * FXML Controller class
  *
- * @author Haroldo&Faby
+ * @author Thiago Rodrigo
  */
-public class UsuarioFormController extends AbstractFormController implements Initializable {
+public  class UsuarioFormController extends AbstractFormController <Usuario> implements Initializable {
+    
+    
    @FXML
-   private TextField usuarioNome;
+   public Label btnCadastrar ;
+   @FXML
+   public Label lblId;
+   @FXML
+   public TextField txtId;
+   @FXML
+   public TextField usuarioNome;
    @FXML 
-   private TextField usuarioEmail;
+   public TextField usuarioEmail;
    @FXML
-   private TextField usuarioLogin;
+   public TextField usuarioLogin;
    @FXML
-   private TextField usuarioSenha;
+   public TextField usuarioSenha;
    
    @FXML
    private Button btnCancelar;
    
    @FXML
+   private Button btnCriarUsuario;
+   
+   @FXML
    private void criarUsuario(ActionEvent event){
-       Usuario usa = new Usuario();
-       UsuarioDAO usaDao = new UsuarioDAO();
+       atualizarBean();
+       try{
+           Usuario usa = new Usuario();
+           UsuarioDAO usaDao = new UsuarioDAO();
+           
+           if(editando.getNome().length()==0 || editando.getEmail().length()== 0 || editando.getLogin().length()== 0 || editando.getSenha().length()== 0)
        
-       usa.setNome("usuarioNome");
-       usa.setEmail("usuarioEmail");
-       usa.setLogin("usuarioLogin");
-       usa.setSenha("usuarioSenha");
-       
-       usaDao.add(usa);
-       
-   }
+      
+            {
+                Dialog.showError("RMTool", "Preencha todos os campos para continuar!!");
+            }
+           else 
+           {
+               if(editando.getId()== null)
+               {
+                 Usuario usuarioLogado = SessionManager.getInstance().get("usuario");
+                 }
+                 usaDao.salvar(editando);
+                 TabManager.getInstance().getMain().tvListaAtualizar();
+                Dialog.showInfo("RMTool", "Projeto criado com sucesso!!"); 
+                fechar();
+                 
+               }
+        }
+        catch( Exception e )
+        {
+            Dialog.showInfo("RMTool", "Problema ao salvar Projeto!!");
+        }
+    }
    
    @FXML
    private void cancelar( ActionEvent event )
@@ -62,12 +95,26 @@ public class UsuarioFormController extends AbstractFormController implements Ini
 
     @Override
     public void carregarBean() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     
+        if( editando.getId() != null )
+        {
+            txtId.setText( editando.getId().toString() );
+        }
+        
+        usuarioNome.setText(editando.getNome());
+        usuarioEmail.setText(editando.getEmail());
+        usuarioLogin.setText(editando.getLogin());
+        usuarioSenha.setText(editando.getSenha());
     }
+ 
 
     @Override
     public void atualizarBean() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        editando.setNome(usuarioNome.getText());
+        editando.setEmail(usuarioEmail.getText());
+        editando.setLogin(usuarioLogin.getText());
+        editando.setSenha(usuarioSenha.getText());
+       
     }
     
 }

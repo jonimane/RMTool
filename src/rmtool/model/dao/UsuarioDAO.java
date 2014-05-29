@@ -29,55 +29,47 @@ public class UsuarioDAO
         return usuarios;
     }
     
-    public void add (Usuario user){
-        Session session = HibernateUtilDAO.getSessionFactory().getCurrentSession();
+    public void criar (Usuario user){
+        Session s;
         
-        try
-        {
-        
-        session.beginTransaction();
-        session.save(user);
-        session.getTransaction().commit();
-       
-        
-     }catch(Exception ex){
-    
-      }
+        s = HibernateUtilDAO.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        s.save(user);
+        s.getTransaction().commit();
+ 
    }
-    
+    public void salvar(Usuario user)
+    {
+        if( user.getId() == null )
+        {
+           criar(user);
+        }
+        else
+        {
+            editar(user);
+        }
+    }
     
     public void deletar (Usuario user){
         
-        Session session = HibernateUtilDAO.getSessionFactory().getCurrentSession();
-        try{
+        Session s;
         
-        session.beginTransaction();
-        session.delete(user);
-        session.getTransaction().commit();
-       
-        
-     }catch(Exception ex){
-        
-    
-      }
+        s = HibernateUtilDAO.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        s.delete(user);
+        s.getTransaction().commit();
+ 
    }
     
     public void editar (Usuario user){
         
-        Session session = HibernateUtilDAO.getSessionFactory().getCurrentSession();//Verificar
+       Session s;
         
-        try{
-        
-        session.beginTransaction();
-        session.merge(user);
-        session.getTransaction().commit();
-       
-        
-     }catch(Exception ex){
-        
-    
-      }
-        session.close();
+        s = HibernateUtilDAO.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        s.merge(user);
+        s.getTransaction().commit();
+ 
    }
     
     public List<Usuario> lista(Usuario user)throws Exception

@@ -33,7 +33,7 @@
         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <Button layoutX="246.0" layoutY="348.0" mnemonicParsing="false" onAction="criarUsuario" text="cadastrar" />
+    <Button layoutX="246.0" layoutY="348.0" mnemonicParsing="false" onAction="#criarUsuario" text="cadastrar" />
     <Button fx:id="btnCancelar" layoutX="392.0" layoutY="348.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
     <TextField layoutX="92.0" layoutY="111.0" prefWidth="200.0" />
     <Label contentDisplay="CENTER" layoutX="218.0" layoutY="34.0" prefHeight="44.0" prefWidth="174.0" text="Cadastro de Usuário" textAlignment="CENTER" textOverrun="CLIP">
