@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="rmtool.controller.UsuarioFormController">
   <children>
-    <Label layoutX="38.0" layoutY="111.0" prefWidth="30.0" text="ID:" />
+    <Label fx:id="lblId" layoutX="38.0" layoutY="111.0" prefWidth="30.0" text="ID:" />
     <GridPane id="GridPane" prefHeight="174.0" prefWidth="534.0" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="155.0">
       <children>
         <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
@@ -33,9 +33,13 @@
         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <Button layoutX="246.0" layoutY="348.0" mnemonicParsing="false" onAction="#criarUsuario" text="cadastrar" />
-    <Button fx:id="btnCancelar" layoutX="392.0" layoutY="348.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
-    <TextField layoutX="92.0" layoutY="111.0" prefWidth="200.0" />
+    <HBox id="HBox" alignment="CENTER" layoutX="33.0" layoutY="348.0" prefWidth="534.0" spacing="8.0">
+      <children>
+        <Button mnemonicParsing="false" onAction="#salvar" text="Salvar" />
+        <Button mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
+      </children>
+    </HBox>
+    <TextField fx:id="txtId" layoutX="92.0" layoutY="111.0" prefWidth="200.0" />
     <Label contentDisplay="CENTER" layoutX="218.0" layoutY="34.0" prefHeight="44.0" prefWidth="174.0" text="Cadastro de Usuário" textAlignment="CENTER" textOverrun="CLIP">
       <font>
         <Font size="16.0" />
