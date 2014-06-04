@@ -90,12 +90,14 @@ public class UsuarioListarController extends AbstractListController<Usuario> imp
     {
         Usuario u = new Usuario();
         TabManager.getInstance().chamarTelaEditar(Telas.UsuarioForm, u);
+        fechar();
     }
     
     @FXML
     public void editar( ActionEvent event )
     {
         TabManager.getInstance().chamarTelaEditar(Telas.UsuarioForm, getUltimaSelecao() );
+        fechar();
     }
     
     @FXML
