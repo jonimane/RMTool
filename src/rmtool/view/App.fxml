@@ -23,16 +23,6 @@
                 <MenuItem mnemonicParsing="false" onAction="#menuUsuarioListar" text="Listar" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Projetos" fx:id="mProjeto">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#menuProjetoListar" text="Listar" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Requisitos" fx:id="mRequisito">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#menuRequisitoListar" text="Listar" />
-              </items>
-            </Menu>
             <Menu mnemonicParsing="false" text="Ajuda" fx:id="mAjuda">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#menuAjudaApresentacao" text="Apresentação" />

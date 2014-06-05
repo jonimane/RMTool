@@ -239,18 +239,6 @@ public class AppController implements Initializable {
     }
     
     @FXML
-    public void menuProjetoListar( ActionEvent event )
-    {
-        TabManager.getInstance().criar( Telas.ProjetoBuscar );
-    }
-    
-    @FXML
-    public void menuRequisitoListar( ActionEvent event )
-    {
-        TabManager.getInstance().criar( Telas.RequisitoListar );
-    }
-    
-    @FXML
     public void menuAjudaSobre( ActionEvent event )
     {
         
